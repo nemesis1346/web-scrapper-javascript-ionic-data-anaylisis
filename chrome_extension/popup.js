@@ -1,5 +1,7 @@
 $(window).ready(function() {
-	console.log('test');
+	var bkg = chrome.extension.getBackgroundPage();
+	
+	bkg.console.log('test');
 	url = window.location.href;
 	if(url.indexOf("facebook.com/groups") > -1){
 		//limited gathering information to wikipedia
@@ -43,12 +45,11 @@ $(window).ready(function() {
 	// else if url.indexOf("facebook.com") > -1{
 	// 	 and it has an element that has #fbProfileCover
 
-
-
 	// }
 
 	$('#test').click(function(){
-       alert('hola');
+	   alert('hola');
+	   console.log('test');	   
     })
 
 
@@ -79,10 +80,6 @@ $(window).ready(function() {
 		listOfLinks.push("https://en.wikipedia.org"+temp);
 		//console.log(index+": https://en.wikipedia.org"+temp)
 	}
-
-
-
-
 
 });
 
