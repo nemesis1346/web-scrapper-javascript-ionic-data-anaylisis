@@ -50,71 +50,120 @@ try{webpackJsonpFirebase([2],{118:function(t,e,n){n(119)},119:function(t,e,n){"u
 //# sourceMappingURL=firebase.js.map
 
 //For MySpace
+// $(window).ready(function () {
+
+//    Configuration Firebase
+//    var configFirebase = {
+// 	apiKey: "AIzaSyBDjpkkuCVNDiKyqpoLLUvQlSsPOvqRYrE",
+//     authDomain: "webscrapper-257cb.firebaseapp.com",
+//     databaseURL: "https://webscrapper-257cb.firebaseio.com",
+//     projectId: "webscrapper-257cb",
+//     storageBucket: "webscrapper-257cb.appspot.com",
+//     messagingSenderId: "863377249055"
+//   };
+//   firebase.initializeApp(configFirebase);
+
+//   var firebaseDatabase=firebase.database();
+
+// 	var customUrl = "https://myspace.com/discover/people";
+// 	url = window.location.href;
+// 	var finalData=[];
+
+// 	if (url.indexOf(customUrl) > -1) { //First condition to evaluate the url
+// 		var listOfLinks = new Array();
+// 		getlinks();
+
+// 		function getlinks() {
+// 			var baseMySpaceUrl = "https://myspace.com";
+// 			$("div.profile.item a").each(function (index) {
+// 				if($(this).attr("href")!=""){
+// 					analizeLink($(this).attr("href"), index);					
+// 				}
+// 			});
+// 			openPages();
+// 		}
+
+// 		function analizeLink(temp, index) {
+// 			listOfLinks.push("https://myspace.com" + temp);
+// 		}
+
+// 		function openPages() {
+// 			for (i = 0; i < 5; i++) {
+// 				if(listOfLinks[i]!=""){
+// 					var temporalWindow = window.open(listOfLinks[i], '_blank');
+// 					listOfLinks.shift();
+// 				}
+// 			}
+// 		}
+
+// 	} else if (url.indexOf("https://myspace.com") > -1) {
+// 		if($(".following").length>0){//condition for profile pages
+// 			getBio();
+// 			function getBio(){
+// 				$("#sidebar a").each(function (index) {
+// 					console.log("index: "+index,"  value: "+$(this).text());
+// 					if(index==1){
+// 						var uniqueId=Math.floor((1 + Math.random()) * 0x10000).toString(16);
+// 						firebaseDatabase.ref('users/'+uniqueId).set({
+// 							"index":index,
+// 							"name":$(this).text()
+// 						});
+// 					}
+// 				});
+// 			}
+// 		}	
+// 	}
+// });
+
+//For Twitter
 $(window).ready(function () {
-
-   //Configuration Firebase
-   var configFirebase = {
-	apiKey: "AIzaSyBDjpkkuCVNDiKyqpoLLUvQlSsPOvqRYrE",
-    authDomain: "webscrapper-257cb.firebaseapp.com",
-    databaseURL: "https://webscrapper-257cb.firebaseio.com",
-    projectId: "webscrapper-257cb",
-    storageBucket: "webscrapper-257cb.appspot.com",
-    messagingSenderId: "863377249055"
-  };
-  firebase.initializeApp(configFirebase);
-
-  var firebaseDatabase=firebase.database();
-
-	var customUrl = "https://myspace.com/discover/people";
-	url = window.location.href;
-	var finalData=[];
-
-	if (url.indexOf(customUrl) > -1) { //First condition to evaluate the url
-		var listOfLinks = new Array();
-		getlinks();
-
-		function getlinks() {
-			var baseMySpaceUrl = "https://myspace.com";
-			$("div.profile.item a").each(function (index) {
-				if($(this).attr("href")!=""){
-					analizeLink($(this).attr("href"), index);					
-				}
-			});
-			openPages();
-		}
-
-		function analizeLink(temp, index) {
-			listOfLinks.push("https://myspace.com" + temp);
-		}
-
-		function openPages() {
-			for (i = 0; i < 5; i++) {
-				if(listOfLinks[i]!=""){
-					var temporalWindow = window.open(listOfLinks[i], '_blank');
-					listOfLinks.shift();
-				}
-			}
-		}
-
-	} else if (url.indexOf("https://myspace.com") > -1) {
-		if($(".following").length>0){//condition for profile pages
-			getBio();
-			function getBio(){
-				$("#sidebar a").each(function (index) {
-					console.log("index: "+index,"  value: "+$(this).text());
-					if(index==1){
-						var uniqueId=Math.floor((1 + Math.random()) * 0x10000).toString(16);
-						firebaseDatabase.ref('users/'+uniqueId).set({
-							"index":index,
-							"name":$(this).text()
-						});
-					}
+	
+	   //Configuration Firebase
+	   var configFirebase = {
+		apiKey: "AIzaSyBDjpkkuCVNDiKyqpoLLUvQlSsPOvqRYrE",
+		authDomain: "webscrapper-257cb.firebaseapp.com",
+		databaseURL: "https://webscrapper-257cb.firebaseio.com",
+		projectId: "webscrapper-257cb",
+		storageBucket: "webscrapper-257cb.appspot.com",
+		messagingSenderId: "863377249055"
+	  };
+	  firebase.initializeApp(configFirebase);
+	
+	  var firebaseDatabase=firebase.database();
+	
+		var customUrl = "https://twitter.com/search";
+		url = window.location.href;
+		var finalData=[];
+	
+		if (url.indexOf(customUrl) > -1) { //First condition to evaluate the url
+			var listOfLinks = new Array();
+			getlinks();
+	
+			function getlinks() {
+				//var baseMySpaceUrl = "https://myspace.com";
+				$("div.content div.stream-item-header").each(function (index) {
+					console.log($(this).text());
 				});
 			}
-		}	
-	}
-});
-
+	
+		} else if (url.indexOf("https://myspace.com") > -1) {
+			if($(".following").length>0){//condition for profile pages
+				getBio();
+				function getBio(){
+					$("#sidebar a").each(function (index) {
+						console.log("index: "+index,"  value: "+$(this).text());
+						if(index==1){
+							var uniqueId=Math.floor((1 + Math.random()) * 0x10000).toString(16);
+							firebaseDatabase.ref('usersTwitter/'+uniqueId).set({
+								"index":index,
+								"name":$(this).text()
+							});
+						}
+					});
+				}
+			}	
+		}
+	});
 
 		//TODO: For Storing in the server
 		/* 		$("p , h1, h2 , h3 , li").each(function(){
