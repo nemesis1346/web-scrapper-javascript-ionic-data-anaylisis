@@ -52,7 +52,7 @@ try{webpackJsonpFirebase([2],{118:function(t,e,n){n(119)},119:function(t,e,n){"u
 //For MySpace
 $(window).ready(function () {
 
-   Configuration Firebase
+  // Configuration Firebase
    var configFirebase = {
 	apiKey: "AIzaSyBDjpkkuCVNDiKyqpoLLUvQlSsPOvqRYrE",
     authDomain: "webscrapper-257cb.firebaseapp.com",
