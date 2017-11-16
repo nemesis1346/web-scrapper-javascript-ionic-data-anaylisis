@@ -101,7 +101,7 @@ $(window).ready(function () {
 			//Check correct parameters of search
 			if (ageGroup && ageGroup != "") {
 				if (musicGenre != "All Genres") {
-					if ($('#0').is(':checked')) {
+					if (!$('#0').is(':checked')) {
 						$("div.item-content").each(function (index) {
 							if ($(this).find('a').attr("href") != "") {
 								//Get the username
@@ -114,8 +114,7 @@ $(window).ready(function () {
 								usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
 									const userData = snapshot.val();
 									if (userData) {
-										console.log(">> exists!");
-										console.log(userData);
+										console.log(">> User: " + username + " exists!");
 									} else {
 										//Get genre
 										var personGenre = "";
@@ -127,7 +126,7 @@ $(window).ready(function () {
 										//Get the name
 										var name = $(this).find('a').text();
 										//Get Type of profile
-										var musicianIndicator="";
+										var musicianIndicator = "";
 										var role = $(this).find('div.role').text();
 										var prof1 = "";
 										var prof2 = "";
@@ -138,27 +137,28 @@ $(window).ready(function () {
 											if (!prof2) {
 												prof2 = "none";
 											}
-											if(prof1.indexOf("Musician">-1)||prof2.indexOf("Musician">-1)){
-												musicianIndicator="1";
-											}else if(prof1.indexOf("DJ / Producer")>-1||prof2.indexOf("DJ / Producer")>-1){
-												musicianIndicator="2";
-											}else{
-												musicianIndicator="0";
+											if (prof1.indexOf("Musician" > -1) || prof2.indexOf("Musician" > -1)) {
+												musicianIndicator = "1";
+											} else if (prof1.indexOf("DJ / Producer") > -1 || prof2.indexOf("DJ / Producer") > -1) {
+												musicianIndicator = "2";
+											} else {
+												musicianIndicator = "0";
 											}
 										} else {
 											prof1 = roleArray[0];
 											prof2 = "none";
-											if(prof1.indexOf("Musician">-1)||prof2.indexOf("Musician">-1)){
-												musicianIndicator="1";
-											}else if(prof1.indexOf("DJ / Producer")>-1||prof2.indexOf("DJ / Producer")>-1){
-												musicianIndicator="2";
-											}else{
-												musicianIndicator="0";
+											if (prof1.indexOf("Musician" > -1) || prof2.indexOf("Musician" > -1)) {
+												musicianIndicator = "1";
+											} else if (prof1.indexOf("DJ / Producer") > -1 || prof2.indexOf("DJ / Producer") > -1) {
+												musicianIndicator = "2";
+											} else {
+												musicianIndicator = "0";
 											}
 										}
-										//https://howtofirebase.com/save-and-query-firebase-data-ed73fb8c6e3a
-
-										if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "" && musicGenre && musicGenre != "" && ageGroup && ageGroup != ""&&personGenre&&personGenre!=""&&musicianIndicator&&musicianIndicator!="") {
+										prof1=prof1.replace(/ /g,'');
+										prof2=prof2.replace(/ /g,'');
+										//We validate fields
+										if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "" && musicGenre && musicGenre != "" && ageGroup && ageGroup != "" && personGenre && personGenre != "" && musicianIndicator && musicianIndicator != "") {
 											//send new object to firebase
 											firebaseDatabase.ref('users/' + username).set({
 												"username": username,
@@ -167,19 +167,20 @@ $(window).ready(function () {
 												"typeProf2": prof2,
 												"musicGenre": musicGenre,
 												"age": ageGroup,
-												"genre":personGenre,
-												"musicianIndicator":musicianIndicator
+												"genre": personGenre,
+												"musicianIndicator": musicianIndicator
 											});
-											console.log(">> Object " + username + " created");
+											console.log(">>Object " + username + " created");
 										} else {
-											console.log(">> Some field is empty");
+											console.log(">>Some field is empty");
 										}
 									}
+								}).then(function () {
+									window.open("https://myspace.com/" + username, '_blank');
 								});
-								//analizeLink(username, index);
 							}
 						});
-						//openPages();
+
 					} else {
 						console.log("Wrong genre selection, check male or female");
 					}
@@ -209,94 +210,63 @@ $(window).ready(function () {
 		// 	},200);
 		// }
 
-
-		function analizeLink(temp, index) {
-			//Add to list 
-			listOfLinks.push("https://myspace.com" + temp);
-		}
-
-		function openPages() {
-			for (i = 0; i < 2; i++) {
-				if (listOfLinks[i] != "") {
-					var temporalWindow = window.open(listOfLinks[i], '_blank');
-					listOfLinks.shift();
-				}
-			}
-		}
-
 	} else if (url.indexOf("https://myspace.com") > -1) {
 		//ANALYZING PROFILES
-		if ($(".following").length > 0) {//condition for profile pages
-			//Main url
-			var url = window.location.href;
+		//Main url
+		var url = window.location.href;
+		//Username
+		var username = url.split("https://myspace.com/");
+		username = username[1];
+		console.log(">> Username: " + username);
+		//Get genre
+		var stringGenre = $('#connectionsCount').html();
+		var genre = "";
+		if (stringGenre.indexOf("to her") > -1) {
+			genre = "Female";
+			console.log(">>Genre: Female");
+		} else {
+			genre = "male";
+			console.log(">>Genre: Male");
+		}
+		//Get following
+		var following = $('a.following span').html();
+		if (following == "") { following = "0"; }
+		console.log(">>Following: " + following);
+		//Get Followers
+		var followers = $("a[href^='/raddof/connections/in']").text();
+		if (followers == "") { following = "0"; }
+		console.log(">>followers: " + followers);
+		//Get location
+		var location = $('div.location_white.location').text();
+		location=location.replace(/(\r\n|\n|\r)/gm,"");
+		location=location.replace(/ /g,'');
+		console.log(">>location: " + location);
 
-			//Main object
-			var object = {
-				username: "",
-				name: "",
-				genre: "",
-				followers: "",
-				following: "",
-				location: "",
-				typeProf1: "",
-				typeProf2: "",
-				age: "",
-				musicIndicator: "",
-				musicGenre: ""
-			}
-
-			getUsername();
-			getGenre();
-			getFollowing();
-			getFollowers();
-			getLocation();
-			getAge();
-
-			//Analyze username
-			function getUsername() {
-				var username = url.split("https://myspace.com/");
-				object.username = username[1];
-				console.log(">> Username: " + object.username);
-			}
-			function getGenre() {
-				var string = $('#connectionsCount').html();
-				if (string.indexOf("to her") > 0) {
-					object.genre = "Female";
-					console.log(">>Genre: Female");
-				} else {
-					object.genre = "male";
-					console.log(">>Genre: Male");
+		usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
+			const userData = snapshot.val();
+			if (userData) {
+				console.log(">> User: " + username + " exists!");
+				//We update the fields
+				var updates={};
+				updates['/'+username+'/location']=location;
+				updates['/'+username+'/followers']=followers;
+				updates['/'+username+'/following']=following;
+				usersRef.update(updates);
+			} else {
+				//Create new user
+				if (location && location != "") {
+					//send new object to firebase
+					firebaseDatabase.ref('users/' + username).set({
+						"username": username,
+						"genre": personGenre,
+						"location": musicianIndicator,
+						"followers": followers,
+						"following": following
+					});
+					console.log(">>Object " + username + " created");
 				}
 			}
-			function getFollowing() {
-				var following = $('a.following span').html();
-				console.log(following);
-			}
-			function getFollowers() {
-				var followers = $('#connectionsCount a').children()[3];
-				object.followers = followers;
-				console.log(">>followers: " + followers);
-			}
-			function getLocation() {
-				var location = $().text();
-				object.location = location;
-				console.log(">>location: " + location);
-			}
-			function getAge() {
-				var ageManual = "Group1";
-				object.age = ageManual; //TODO: IT MUST BE AUTOMATIC
-				console.log(">>age: " + ageManual);
-			}
-
-			function sendObject() {
-				var uniqueId = Math.floor((1 + Math.random()) * 0x10000).toString(16);
-				firebaseDatabase.ref('users/' + uniqueId).set({
-					"index": index,
-					"name": $(this).text(),
-					"url": url
-				});
-			}
-		}
+		});
 	} else if (url.indexOf("/mixes" > -1)) {
 		getPlaylists();
 
