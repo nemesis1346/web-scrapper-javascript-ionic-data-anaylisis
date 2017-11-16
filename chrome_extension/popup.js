@@ -77,62 +77,118 @@ $(window).ready(function () {
 
 		function getlinks() {
 			var baseMySpaceUrl = "https://myspace.com";
-			$("div.item-content").each(function (index) {
-				if ($(this).find('a').attr("href") != "") {
-					//Get the username
-					var username = $(this).find('a').attr("href");
-					//correct points and invalid characters
-					username = username.toLowerCase();
-					username = username.replace(/\./g, "_");
-					username = username.replace("/", "");
-					//We check if there is an object with that username
-					usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
-						const userData = snapshot.val();
-						if (userData) {
-							console.log(">> exists!");
-							console.log(userData);
-						} else {
-							//Get the name
-							var name = $(this).find('a').text();
-							//Get Type of profile
-							var role = $(this).find('div.role').text();
-							var prof1 = "";
-							var prof2 = "";
-							var roleArray = role.split(",");
-							if (roleArray.length > 0) {
-								prof1 = roleArray[0];
-								prof2 = roleArray[1];
-								if (!prof2) {
-									prof2 = "none";
-								}
-							} else {
-								prof1 = roleArray[0];
-								prof2 = "none";
-							}
-							//Get the music genre
-							//https://howtofirebase.com/save-and-query-firebase-data-ed73fb8c6e3a
-							//var musicGenre=
-							//Get age
-							if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "") {
 
-								//send new object to firebase
-								firebaseDatabase.ref('users/' + username).set({
-									"username": username,
-									"name": name,
-									"typeProf1": prof1,
-									"typeProf2": prof2
+			//Get age
+			var ageGroup = "";
+			var initialAge = $('div.leftGrip.grip').find('span').text();
+			var finalAge = $('div.rightGrip.grip').find('span').text();
+			if (finalAge != "50+") {
+				finalAge = parseInt(finalAge);
+			} else {
+				finalAge = 50;
+			}
+			if (initialAge >= 18 && finalAge <= 26) {
+				ageGroup = "group1";
+			} else if (initialAge >= 27 && finalAge <= 35) {
+				ageGroup = "group2";
+			} else if (initialAge >= 36 && finalAge <= 42) {
+				ageGroup = "group3";
+			} else if (initialAge >= 43 && finalAge <= 50) {
+				ageGroup = "group4";
+			}
+			//Get musicGenre
+			var musicGenre = $('select#genres option:selected').text();
+			//Check correct parameters of search
+			if (ageGroup && ageGroup != "") {
+				if (musicGenre != "All Genres") {
+					if ($('#0').is(':checked')) {
+						$("div.item-content").each(function (index) {
+							if ($(this).find('a').attr("href") != "") {
+								//Get the username
+								var username = $(this).find('a').attr("href");
+								//correct points and invalid characters
+								username = username.toLowerCase();
+								username = username.replace(/\./g, "_");
+								username = username.replace("/", "");
+								//We check if there is an object with that username
+								usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
+									const userData = snapshot.val();
+									if (userData) {
+										console.log(">> exists!");
+										console.log(userData);
+									} else {
+										//Get genre
+										var personGenre = "";
+										if ($('#1').is(':checked')) {//male
+											personGenre = "male";
+										} else {
+											personGenre = "female";
+										}
+										//Get the name
+										var name = $(this).find('a').text();
+										//Get Type of profile
+										var musicianIndicator="";
+										var role = $(this).find('div.role').text();
+										var prof1 = "";
+										var prof2 = "";
+										var roleArray = role.split(",");
+										if (roleArray.length > 0) {
+											prof1 = roleArray[0];
+											prof2 = roleArray[1];
+											if (!prof2) {
+												prof2 = "none";
+											}
+											if(prof1.indexOf("Musician">-1)||prof2.indexOf("Musician">-1)){
+												musicianIndicator="1";
+											}else if(prof1.indexOf("DJ / Producer")>-1||prof2.indexOf("DJ / Producer")>-1){
+												musicianIndicator="2";
+											}else{
+												musicianIndicator="0";
+											}
+										} else {
+											prof1 = roleArray[0];
+											prof2 = "none";
+											if(prof1.indexOf("Musician">-1)||prof2.indexOf("Musician">-1)){
+												musicianIndicator="1";
+											}else if(prof1.indexOf("DJ / Producer")>-1||prof2.indexOf("DJ / Producer")>-1){
+												musicianIndicator="2";
+											}else{
+												musicianIndicator="0";
+											}
+										}
+										//https://howtofirebase.com/save-and-query-firebase-data-ed73fb8c6e3a
+
+										if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "" && musicGenre && musicGenre != "" && ageGroup && ageGroup != ""&&personGenre&&personGenre!=""&&musicianIndicator&&musicianIndicator!="") {
+											//send new object to firebase
+											firebaseDatabase.ref('users/' + username).set({
+												"username": username,
+												"name": name,
+												"typeProf1": prof1,
+												"typeProf2": prof2,
+												"musicGenre": musicGenre,
+												"age": ageGroup,
+												"genre":personGenre,
+												"musicianIndicator":musicianIndicator
+											});
+											console.log(">> Object " + username + " created");
+										} else {
+											console.log(">> Some field is empty");
+										}
+									}
 								});
-								console.log(">> Object " + username + " created");
-							} else {
-								console.log(">> Some field is empty");
+								//analizeLink(username, index);
 							}
-						}
-					});
-
-					//analizeLink(username, index);
+						});
+						//openPages();
+					} else {
+						console.log("Wrong genre selection, check male or female");
+					}
+				} else {
+					console.log("Wrong selection of music genre, choose any music genre");
 				}
-			});
-			//openPages();
+			} else {
+				console.log("Wrong age selection, group options: group1(18-26),group2(27-35),group(36-43),group(44-50+)");
+			}
 		}
 
 		// function scrollThePage2(){
