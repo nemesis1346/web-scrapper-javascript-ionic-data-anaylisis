@@ -64,6 +64,7 @@ $(window).ready(function () {
 	firebase.initializeApp(configFirebase);
 
 	var firebaseDatabase = firebase.database();
+	var usersRef = firebaseDatabase.ref('/users');
 
 	var customUrl = "https://myspace.com/discover/people";
 	url = window.location.href;
@@ -80,37 +81,57 @@ $(window).ready(function () {
 				if ($(this).find('a').attr("href") != "") {
 					//Get the username
 					var username = $(this).find('a').attr("href");
+					//correct points and invalid characters
 					username = username.toLowerCase();
-					username=username.replace(/\./g,"_")					
-					console.log(">>USERNAME: "+username)
-					//query if there is some object with that id
-					var existingUser = firebaseDatabase.ref().child(username).push().key;
-					console.log(">> KEY: "+existingUser);
-					if (existingUser != "") {	
-						//correct points and invalid characters
-						//Get the name
-						var name = $(this).find('a').text();
-						//Get Type of profile
-						var role=$(this).find('div.role');
-
-						if (name != "" && username != "") {
-							//send new object to firebase
-							firebaseDatabase.ref('users/' + username).set({
-								"usename": username,
-								"name": name
-							});
-							console.log(">> Object "+username+" created");
-							
+					username = username.replace(/\./g, "_");
+					username = username.replace("/", "");
+					//We check if there is an object with that username
+					usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
+						const userData = snapshot.val();
+						if (userData) {
+							console.log(">> exists!");
+							console.log(userData);
 						} else {
-							console.log(">> Some field is empty");
+							//Get the name
+							var name = $(this).find('a').text();
+							//Get Type of profile
+							var role = $(this).find('div.role').text();
+							var prof1 = "";
+							var prof2 = "";
+							var roleArray = role.split(",");
+							if (roleArray.length > 0) {
+								prof1 = roleArray[0];
+								prof2 = roleArray[1];
+								if (!prof2) {
+									prof2 = "none";
+								}
+							} else {
+								prof1 = roleArray[0];
+								prof2 = "none";
+							}
+							//Get the music genre
+							//var musicGenre=
+							//Get age
+							if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "") {
+
+								//send new object to firebase
+								firebaseDatabase.ref('users/' + username).set({
+									"username": username,
+									"name": name,
+									"typeProf1": prof1,
+									"typeProf2": prof2
+								});
+								console.log(">> Object " + username + " created");
+							} else {
+								console.log(">> Some field is empty");
+							}
 						}
-					} else {
-						console.log(">> Existing user: " + existingUser);
-					}
-					analizeLink(username, index);
+					});
+
+					//analizeLink(username, index);
 				}
 			});
-			openPages();
+			//openPages();
 		}
 
 		// function scrollThePage2(){
