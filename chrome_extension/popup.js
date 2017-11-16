@@ -110,6 +110,7 @@ $(window).ready(function () {
 								prof2 = "none";
 							}
 							//Get the music genre
+							//https://howtofirebase.com/save-and-query-firebase-data-ed73fb8c6e3a
 							//var musicGenre=
 							//Get age
 							if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "") {
