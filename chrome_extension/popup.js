@@ -77,7 +77,6 @@ $(window).ready(function () {
 
 		function getlinks() {
 			var baseMySpaceUrl = "https://myspace.com";
-
 			//Get age
 			var ageGroup = "";
 			var initialAge = $('div.leftGrip.grip').find('span').text();
@@ -99,10 +98,10 @@ $(window).ready(function () {
 			//Get musicGenre
 			var musicGenre = $('select#genres option:selected').text();
 			//Check correct parameters of search
-			if (ageGroup && ageGroup != "") {
-				if (musicGenre != "All Genres") {
+			if (ageGroup && ageGroup != "") {	
 					if (!$('#0').is(':checked')) {
-						$("div.item-content").each(function (index) {
+						$("div.item-content").each(function (i, index) {
+							existenceFlag=false;
 							if ($(this).find('a').attr("href") != "") {
 								//Get the username
 								var username = $(this).find('a').attr("href");
@@ -115,6 +114,12 @@ $(window).ready(function () {
 									const userData = snapshot.val();
 									if (userData) {
 										console.log(">> User: " + username + " exists!");
+										//existenceFlag=true;
+										//update music genre
+										var updates={};
+										updates['/'+username+'/musicGenre']=musicGenre;
+										usersRef.update(updates);
+										console.log(">>Updated");
 									} else {
 										//Get genre
 										var personGenre = "";
@@ -176,17 +181,17 @@ $(window).ready(function () {
 										}
 									}
 								}).then(function () {
-									window.open("https://myspace.com/" + username, '_blank');
+									if(!existenceFlag){
+										window.open("https://myspace.com/" + username, '_blank');
+									}
 								});
 							}
+							return i<35;
 						});
 
 					} else {
 						console.log("Wrong genre selection, check male or female");
 					}
-				} else {
-					console.log("Wrong selection of music genre, choose any music genre");
-				}
 			} else {
 				console.log("Wrong age selection, group options: group1(18-26),group2(27-35),group(36-43),group(44-50+)");
 			}
