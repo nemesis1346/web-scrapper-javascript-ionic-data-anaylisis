@@ -233,14 +233,14 @@ $(window).ready(function () {
 		if (following == "") { following = "0"; }
 		console.log(">>Following: " + following);
 		//Get Followers
-		var followers = $("a[href^='/raddof/connections/in']").text();
+		var followers = $("a[href^='/"+username+"/connections/in']").text();
 		if (followers == "") { following = "0"; }
-		console.log(">>followers: " + followers);
+		console.log(">>Followers: " + followers);
 		//Get location
 		var location = $('div.location_white.location').text();
 		location=location.replace(/(\r\n|\n|\r)/gm,"");
 		location=location.replace(/ /g,'');
-		console.log(">>location: " + location);
+		console.log(">>Location: " + location);
 
 		usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
 			const userData = snapshot.val();
