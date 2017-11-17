@@ -64,7 +64,7 @@ $(window).ready(function () {
 	firebase.initializeApp(configFirebase);
 
 	var firebaseDatabase = firebase.database();
-	var usersRef = firebaseDatabase.ref('/users_Toronto');
+	var usersRef = firebaseDatabase.ref('/users');
 
 	var customUrl = "https://myspace.com/discover/people";
 	url = window.location.href;
@@ -144,10 +144,8 @@ $(window).ready(function () {
 										}
 										prof1 = prof1.replace(/ /g, '');
 										prof2 = prof2.replace(/ /g, '');
-										if (prof1 == "Musician" || prof2 == "Musician" ) {
+										if (prof1 == "Musician" ||prof1=="DJ"||prof1=="Promoter"|| prof2 == "Musician"|| prof2=="DJ"||prof2=="Promoter") {
 											musicianIndicator = "1";
-										} else if (prof1 == "DJ / Producer" || prof2 == "DJ / Producer") {
-											musicianIndicator = "2";
 										} else {
 											musicianIndicator = "0";
 										}
@@ -156,10 +154,8 @@ $(window).ready(function () {
 										prof2 = "none";
 										prof1 = prof1.replace(/ /g, '');
 										prof2 = prof2.replace(/ /g, '');
-										if (prof1 == "Musician" || prof2 == "Musician" ) {
+										if (prof1 == "Musician" ||prof1=="DJ"||prof1=="Promoter"|| prof2 == "Musician"|| prof2=="DJ"||prof2=="Promoter") {
 											musicianIndicator = "1";
-										} else if (prof1 == "DJ / Producer" || prof2 == "DJ / Producer") {
-											musicianIndicator = "2";
 										} else {
 											musicianIndicator = "0";
 										}
@@ -188,7 +184,7 @@ $(window).ready(function () {
 								}
 							});
 						}
-						return i < 5;
+						return i < 50;
 					});
 
 				} else {
@@ -224,6 +220,10 @@ $(window).ready(function () {
 		//Username
 		var username = url.split("https://myspace.com/");
 		username = username[1];
+		//correct points and invalid characters
+		username = username.toLowerCase();
+		username = username.replace(/\./g, "_");
+		username = username.replace("/", "");
 		console.log(">> Username: " + username);
 		//Get genre
 		var stringGenre = $('#connectionsCount').html();
@@ -258,10 +258,14 @@ $(window).ready(function () {
 				updates['/' + username + '/location'] = location;
 				updates['/' + username + '/followers'] = followers;
 				updates['/' + username + '/following'] = following;
-				usersRef.update(updates);
+				usersRef.update(updates).then(function(){
+					window.close();
+				});
+
 			} else {
 				//Create new user
 				if (location && location != "") {
+					console.log("llega aqui");
 					//send new object to firebase
 					usersRef.child(username).set({
 						"username": username,
@@ -269,8 +273,10 @@ $(window).ready(function () {
 						"location": musicianIndicator,
 						"followers": followers,
 						"following": following
+					}).then(function(){
+						console.log(">>Object " + username + " created");
+						window.close();						
 					});
-					console.log(">>Object " + username + " created");
 				}
 			}
 		});
