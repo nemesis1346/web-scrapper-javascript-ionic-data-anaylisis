@@ -64,7 +64,7 @@ $(window).ready(function () {
 	firebase.initializeApp(configFirebase);
 
 	var firebaseDatabase = firebase.database();
-	var usersRef = firebaseDatabase.ref('/users');
+	var usersRef = firebaseDatabase.ref('/users_Toronto');
 
 	var customUrl = "https://myspace.com/discover/people";
 	url = window.location.href;
@@ -144,9 +144,9 @@ $(window).ready(function () {
 										}
 										prof1 = prof1.replace(/ /g, '');
 										prof2 = prof2.replace(/ /g, '');
-										if (prof1 == "Musician" > -1 || prof2 == "Musician" > -1) {
+										if (prof1 == "Musician" || prof2 == "Musician" ) {
 											musicianIndicator = "1";
-										} else if (prof1 == "DJ / Producer" > -1 || prof2 == "DJ / Producer") {
+										} else if (prof1 == "DJ / Producer" || prof2 == "DJ / Producer") {
 											musicianIndicator = "2";
 										} else {
 											musicianIndicator = "0";
@@ -156,9 +156,9 @@ $(window).ready(function () {
 										prof2 = "none";
 										prof1 = prof1.replace(/ /g, '');
 										prof2 = prof2.replace(/ /g, '');
-										if (prof1 == "Musician" > -1 || prof2 == "Musician" > -1) {
+										if (prof1 == "Musician" || prof2 == "Musician" ) {
 											musicianIndicator = "1";
-										} else if (prof1 == "DJ / Producer" > -1 || prof2 == "DJ / Producer") {
+										} else if (prof1 == "DJ / Producer" || prof2 == "DJ / Producer") {
 											musicianIndicator = "2";
 										} else {
 											musicianIndicator = "0";
@@ -167,7 +167,7 @@ $(window).ready(function () {
 									//We validate fields
 									if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "" && musicGenre && musicGenre != "" && ageGroup && ageGroup != "" && personGenre && personGenre != "" && musicianIndicator && musicianIndicator != "") {
 										//send new object to firebase
-										firebaseDatabase.ref('users/' + username).set({
+										usersRef.child(username).set({
 											"username": username,
 											"name": name,
 											"typeProf1": prof1,
@@ -263,7 +263,7 @@ $(window).ready(function () {
 				//Create new user
 				if (location && location != "") {
 					//send new object to firebase
-					firebaseDatabase.ref('users/' + username).set({
+					usersRef.child(username).set({
 						"username": username,
 						"genre": personGenre,
 						"location": musicianIndicator,
