@@ -98,100 +98,102 @@ $(window).ready(function () {
 			//Get musicGenre
 			var musicGenre = $('select#genres option:selected').text();
 			//Check correct parameters of search
-			if (ageGroup && ageGroup != "") {	
-					if (!$('#0').is(':checked')) {
-						$("div.item-content").each(function (i, index) {
-							existenceFlag=false;
-							if ($(this).find('a').attr("href") != "") {
-								//Get the username
-								var username = $(this).find('a').attr("href");
-								//correct points and invalid characters
-								username = username.toLowerCase();
-								username = username.replace(/\./g, "_");
-								username = username.replace("/", "");
-								//We check if there is an object with that username
-								usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
-									const userData = snapshot.val();
-									if (userData) {
-										console.log(">> User: " + username + " exists!");
-										//existenceFlag=true;
-										//update music genre
-										var updates={};
-										updates['/'+username+'/musicGenre']=musicGenre;
-										usersRef.update(updates);
-										console.log(">>Updated");
+			if (ageGroup && ageGroup != "") {
+				if (!$('#0').is(':checked')) {
+					$("div.item-content").each(function (i, index) {
+						existenceFlag = false;
+						if ($(this).find('a').attr("href") != "") {
+							//Get the username
+							var username = $(this).find('a').attr("href");
+							//correct points and invalid characters
+							username = username.toLowerCase();
+							username = username.replace(/\./g, "_");
+							username = username.replace("/", "");
+							//We check if there is an object with that username
+							usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
+								const userData = snapshot.val();
+								if (userData) {
+									console.log(">> User: " + username + " exists!");
+									//existenceFlag=true;
+									//update music genre
+									var updates = {};
+									updates['/' + username + '/musicGenre'] = musicGenre;
+									usersRef.update(updates);
+									console.log(">>Updated");
+								} else {
+									//Get genre
+									var personGenre = "";
+									if ($('#1').is(':checked')) {//male
+										personGenre = "male";
 									} else {
-										//Get genre
-										var personGenre = "";
-										if ($('#1').is(':checked')) {//male
-											personGenre = "male";
-										} else {
-											personGenre = "female";
-										}
-										//Get the name
-										var name = $(this).find('a').text();
-										//Get Type of profile
-										var musicianIndicator = "";
-										var role = $(this).find('div.role').text();
-										var prof1 = "";
-										var prof2 = "";
-										var roleArray = role.split(",");
-										if (roleArray.length > 0) {
-											prof1 = roleArray[0];
-											prof2 = roleArray[1];
-											if (!prof2) {
-												prof2 = "none";
-											}
-											if (prof1.indexOf("Musician" > -1) || prof2.indexOf("Musician" > -1)) {
-												musicianIndicator = "1";
-											} else if (prof1.indexOf("DJ / Producer") > -1 || prof2.indexOf("DJ / Producer") > -1) {
-												musicianIndicator = "2";
-											} else {
-												musicianIndicator = "0";
-											}
-										} else {
-											prof1 = roleArray[0];
+										personGenre = "female";
+									}
+									//Get the name
+									var name = $(this).find('a').text();
+									//Get Type of profile
+									var musicianIndicator = "";
+									var role = $(this).find('div.role').text();
+									var prof1 = "";
+									var prof2 = "";
+									var roleArray = role.split(",");
+									if (roleArray.length > 0) {
+										prof1 = roleArray[0];
+										prof2 = roleArray[1];
+										if (!prof2) {
 											prof2 = "none";
-											if (prof1.indexOf("Musician" > -1) || prof2.indexOf("Musician" > -1)) {
-												musicianIndicator = "1";
-											} else if (prof1.indexOf("DJ / Producer") > -1 || prof2.indexOf("DJ / Producer") > -1) {
-												musicianIndicator = "2";
-											} else {
-												musicianIndicator = "0";
-											}
 										}
-										prof1=prof1.replace(/ /g,'');
-										prof2=prof2.replace(/ /g,'');
-										//We validate fields
-										if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "" && musicGenre && musicGenre != "" && ageGroup && ageGroup != "" && personGenre && personGenre != "" && musicianIndicator && musicianIndicator != "") {
-											//send new object to firebase
-											firebaseDatabase.ref('users/' + username).set({
-												"username": username,
-												"name": name,
-												"typeProf1": prof1,
-												"typeProf2": prof2,
-												"musicGenre": musicGenre,
-												"age": ageGroup,
-												"genre": personGenre,
-												"musicianIndicator": musicianIndicator
-											});
-											console.log(">>Object " + username + " created");
+										prof1 = prof1.replace(/ /g, '');
+										prof2 = prof2.replace(/ /g, '');
+										if (prof1 == "Musician" > -1 || prof2 == "Musician" > -1) {
+											musicianIndicator = "1";
+										} else if (prof1 == "DJ / Producer" > -1 || prof2 == "DJ / Producer") {
+											musicianIndicator = "2";
 										} else {
-											console.log(">>Some field is empty");
+											musicianIndicator = "0";
+										}
+									} else {
+										prof1 = roleArray[0];
+										prof2 = "none";
+										prof1 = prof1.replace(/ /g, '');
+										prof2 = prof2.replace(/ /g, '');
+										if (prof1 == "Musician" > -1 || prof2 == "Musician" > -1) {
+											musicianIndicator = "1";
+										} else if (prof1 == "DJ / Producer" > -1 || prof2 == "DJ / Producer") {
+											musicianIndicator = "2";
+										} else {
+											musicianIndicator = "0";
 										}
 									}
-								}).then(function () {
-									if(!existenceFlag){
-										window.open("https://myspace.com/" + username, '_blank');
+									//We validate fields
+									if (name && name != "" && username && username != "" && prof1 && prof1 != "" && prof2 && prof2 != "" && musicGenre && musicGenre != "" && ageGroup && ageGroup != "" && personGenre && personGenre != "" && musicianIndicator && musicianIndicator != "") {
+										//send new object to firebase
+										firebaseDatabase.ref('users/' + username).set({
+											"username": username,
+											"name": name,
+											"typeProf1": prof1,
+											"typeProf2": prof2,
+											"musicGenre": musicGenre,
+											"age": ageGroup,
+											"genre": personGenre,
+											"musicianIndicator": musicianIndicator
+										});
+										console.log(">>Object " + username + " created");
+									} else {
+										console.log(">>Some field is empty");
 									}
-								});
-							}
-							return i<35;
-						});
+								}
+							}).then(function () {
+								if (!existenceFlag) {
+									window.open("https://myspace.com/" + username, '_blank');
+								}
+							});
+						}
+						return i < 5;
+					});
 
-					} else {
-						console.log("Wrong genre selection, check male or female");
-					}
+				} else {
+					console.log("Wrong genre selection, check male or female");
+				}
 			} else {
 				console.log("Wrong age selection, group options: group1(18-26),group2(27-35),group(36-43),group(44-50+)");
 			}
@@ -238,13 +240,13 @@ $(window).ready(function () {
 		if (following == "") { following = "0"; }
 		console.log(">>Following: " + following);
 		//Get Followers
-		var followers = $("a[href^='/"+username+"/connections/in']").text();
+		var followers = $("a[href^='/" + username + "/connections/in']").text();
 		if (followers == "") { following = "0"; }
 		console.log(">>Followers: " + followers);
 		//Get location
 		var location = $('div.location_white.location').text();
-		location=location.replace(/(\r\n|\n|\r)/gm,"");
-		location=location.replace(/ /g,'');
+		location = location.replace(/(\r\n|\n|\r)/gm, "");
+		location = location.replace(/ /g, '');
 		console.log(">>Location: " + location);
 
 		usersRef.orderByChild("username").equalTo(username).once("value", snapshot => {
@@ -252,10 +254,10 @@ $(window).ready(function () {
 			if (userData) {
 				console.log(">> User: " + username + " exists!");
 				//We update the fields
-				var updates={};
-				updates['/'+username+'/location']=location;
-				updates['/'+username+'/followers']=followers;
-				updates['/'+username+'/following']=following;
+				var updates = {};
+				updates['/' + username + '/location'] = location;
+				updates['/' + username + '/followers'] = followers;
+				updates['/' + username + '/following'] = following;
 				usersRef.update(updates);
 			} else {
 				//Create new user
