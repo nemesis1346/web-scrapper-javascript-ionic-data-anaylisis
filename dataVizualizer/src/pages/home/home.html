@@ -1,14 +1,45 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+<!-- ANDROID PLATFORM TOOLBAR -->
+<ion-header showWhen="android">
+  <ion-navbar hideBackButton>
+    <ion-toolbar class="toolbar toolbar-ios" no-border-top="">
+      <div class="toolbar-background-ios"></div>
+      <button ion-button="" menutoggle="" right="" (click)="toggleMenu()" class="disable-hover bar-buttons bar-buttons-ios bar-button bar-button-ios bar-button-default bar-button-default-ios bar-button-menutoggle bar-button-menutoggle-ios">
+        <span class="button-inner">
+          <ion-icon name="menu" role="img" class="icon icon-ios ion-ios-menu" aria-label="menu"></ion-icon>
+        </span>
+        <div class="button-effect"></div>
+      </button>
+      <div class="toolbar-content toolbar-content-ios">
+        <ion-title class="title title-ios">
+          <div class="toolbar-title toolbar-title-ios">DATA-VISUALIZER</div>
+        </ion-title>
+      </div>
+    </ion-toolbar>
   </ion-navbar>
 </ion-header>
 
+
+<ion-menu [content]="main_menu" type="overlay">
+  <ion-header class="main-menu-stc">
+    <h1>
+      <div class="sub-menu-title">
+        DATA-VISUALIZER
+      </div>
+    </h1>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button class="item-menu" menuClose ion-item detail-none>Graph1</button>
+      <button class="item-menu" menuClose ion-item detail-none>Graph2</button>
+      <button class="item-menu" menuClose ion-item detail-none>Graph3</button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav #main_menu [root]="main_menu_event"></ion-nav>
+
+
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div class="main-content">
+
+  </div>
 </ion-content>
