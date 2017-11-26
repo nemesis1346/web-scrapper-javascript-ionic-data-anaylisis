@@ -1,14 +1,22 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController,MenuController } from 'ionic-angular';
+import { MusicGenrePage } from '../../pages/music-genre/music-genre';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  constructor(public navCtrl: NavController) {
-
+  musicGenrePage: any;
+  constructor(public navCtrl: NavController, public menuCtrl:  MenuController) {
+    this.musicGenrePage = MusicGenrePage;
   }
 
+  openMusicGenre() {
+    this.navCtrl.push(this.musicGenrePage, {
+
+    });
+  }
+  toggleMenu() {
+    this.menuCtrl.open();
+  }
 }
