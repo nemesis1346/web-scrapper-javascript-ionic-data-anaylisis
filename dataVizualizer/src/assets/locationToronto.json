@@ -1,0 +1,387 @@
+[
+    {
+        "location": "Ajax,ON,Canada",
+        "Frequency": 21,
+        "Percent": 0.9,
+        "Valid Percent": 0.9,
+        "CumulativePercent": 11.2
+    },
+    {
+        "location": "Akron,OH",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 11.3
+    },
+    {
+        "location": "Alliston,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 11.3
+    },
+    {
+        "location": "Ancaster,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 11.4
+    },
+    {
+        "location": "Aurora,ON,Canada",
+        "Frequency": 4,
+        "Percent": 0.2,
+        "Valid Percent": 0.2,
+        "CumulativePercent": 11.6
+    },
+    {
+        "location": "Bayside,Victoria,Australia",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 11.6
+    },
+    {
+        "location": "Beaverton,OR",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 11.7
+    },
+    {
+        "location": "Beeton,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 11.7
+    },
+    {
+        "location": "Bolton,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 11.8
+    },
+    {
+        "location": "Brampton,ON,Canada",
+        "Frequency": 88,
+        "Percent": 3.8,
+        "Valid Percent": 3.8,
+        "CumulativePercent": 15.6
+    },
+    {
+        "location": "Burlington,ON,Canada",
+        "Frequency": 40,
+        "Percent": 1.7,
+        "Valid Percent": 1.7,
+        "CumulativePercent": 17.3
+    },
+    {
+        "location": "Caledon,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 17.3
+    },
+    {
+        "location": "CaledonVillage,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 17.4
+    },
+    {
+        "location": "Campbellville,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 17.4
+    },
+    {
+        "location": "Concord,ON,Canada",
+        "Frequency": 3,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 17.5
+    },
+    {
+        "location": "Courtice,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 17.6
+    },
+    {
+        "location": "Dundas,ON,Canada",
+        "Frequency": 4,
+        "Percent": 0.2,
+        "Valid Percent": 0.2,
+        "CumulativePercent": 17.8
+    },
+    {
+        "location": "EastYork,ON,Canada",
+        "Frequency": 10,
+        "Percent": 0.4,
+        "Valid Percent": 0.4,
+        "CumulativePercent": 18.2
+    },
+    {
+        "location": "Etobicoke,ON,Canada",
+        "Frequency": 30,
+        "Percent": 1.3,
+        "Valid Percent": 1.3,
+        "CumulativePercent": 19.5
+    },
+    {
+        "location": "Georgetown,ON,Canada",
+        "Frequency": 7,
+        "Percent": 0.3,
+        "Valid Percent": 0.3,
+        "CumulativePercent": 19.8
+    },
+    {
+        "location": "Gormley,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 19.8
+    },
+    {
+        "location": "Hamilton,ON,Canada",
+        "Frequency": 139,
+        "Percent": 6,
+        "Valid Percent": 6,
+        "CumulativePercent": 25.8
+    },
+    {
+        "location": "Maple,ON,Canada",
+        "Frequency": 3,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 25.9
+    },
+    {
+        "location": "Marietta,GA",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 26
+    },
+    {
+        "location": "Markham,ON,Canada",
+        "Frequency": 27,
+        "Percent": 1.2,
+        "Valid Percent": 1.2,
+        "CumulativePercent": 27.1
+    },
+    {
+        "location": "Milton,ON,Canada",
+        "Frequency": 6,
+        "Percent": 0.3,
+        "Valid Percent": 0.3,
+        "CumulativePercent": 27.4
+    },
+    {
+        "location": "Mississauga,ON,Canada",
+        "Frequency": 138,
+        "Percent": 5.9,
+        "Valid Percent": 5.9,
+        "CumulativePercent": 33.3
+    },
+    {
+        "location": "Newmarket,ON,Canada",
+        "Frequency": 18,
+        "Percent": 0.8,
+        "Valid Percent": 0.8,
+        "CumulativePercent": 34.1
+    },
+    {
+        "location": "NiagaraontheLake,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 34.1
+    },
+    {
+        "location": "NorthYork,ON,Canada",
+        "Frequency": 49,
+        "Percent": 2.1,
+        "Valid Percent": 2.1,
+        "CumulativePercent": 36.2
+    },
+    {
+        "location": "Oakville,ON,Canada",
+        "Frequency": 35,
+        "Percent": 1.5,
+        "Valid Percent": 1.5,
+        "CumulativePercent": 37.7
+    },
+    {
+        "location": "Opelousas,LA",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 37.8
+    },
+    {
+        "location": "Oroville,CA",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 37.8
+    },
+    {
+        "location": "Oshawa,ON,Canada",
+        "Frequency": 57,
+        "Percent": 2.4,
+        "Valid Percent": 2.4,
+        "CumulativePercent": 40.3
+    },
+    {
+        "location": "Pickering,ON,Canada",
+        "Frequency": 11,
+        "Percent": 0.5,
+        "Valid Percent": 0.5,
+        "CumulativePercent": 40.7
+    },
+    {
+        "location": "PortPerry,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 40.8
+    },
+    {
+        "location": "Ransomville,NY",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 40.8
+    },
+    {
+        "location": "RichmondHill,ON,Canada",
+        "Frequency": 14,
+        "Percent": 0.6,
+        "Valid Percent": 0.6,
+        "CumulativePercent": 41.4
+    },
+    {
+        "location": "Scarborough,ON,Canada",
+        "Frequency": 91,
+        "Percent": 3.9,
+        "Valid Percent": 3.9,
+        "CumulativePercent": 45.3
+    },
+    {
+        "location": "Schomberg,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 45.4
+    },
+    {
+        "location": "Springfield,MI",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 45.4
+    },
+    {
+        "location": "StoneyCreek,ON,Canada",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 45.5
+    },
+    {
+        "location": "Stouffville,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 45.5
+    },
+    {
+        "location": "Summitville,IN",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 45.6
+    },
+    {
+        "location": "Talent,OR",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 45.6
+    },
+    {
+        "location": "Thornhill,ON,Canada",
+        "Frequency": 13,
+        "Percent": 0.6,
+        "Valid Percent": 0.6,
+        "CumulativePercent": 46.2
+    },
+    {
+        "location": "Toronto,ON,Canada",
+        "Frequency": 1200,
+        "Percent": 51.4,
+        "Valid Percent": 51.4,
+        "CumulativePercent": 97.6
+    },
+    {
+        "location": "Vaughan,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 97.7
+    },
+    {
+        "location": "Warren,MI",
+        "Frequency": 1,
+        "Percent": 0,
+        "Valid Percent": 0,
+        "CumulativePercent": 97.7
+    },
+    {
+        "location": "Waterdown,ON,Canada",
+        "Frequency": 2,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 97.8
+    },
+    {
+        "location": "Whitby,ON,Canada",
+        "Frequency": 19,
+        "Percent": 0.8,
+        "Valid Percent": 0.8,
+        "CumulativePercent": 98.6
+    },
+    {
+        "location": "Wilson,NY",
+        "Frequency": 3,
+        "Percent": 0.1,
+        "Valid Percent": 0.1,
+        "CumulativePercent": 98.8
+    },
+    {
+        "location": "Woodbridge,ON,Canada",
+        "Frequency": 13,
+        "Percent": 0.6,
+        "Valid Percent": 0.6,
+        "CumulativePercent": 99.3
+    },
+    {
+        "location": "York,ON,Canada",
+        "Frequency": 16,
+        "Percent": 0.7,
+        "Valid Percent": 0.7,
+        "CumulativePercent": 100
+    },
+    {
+        "location": "Total",
+        "Frequency": 2334,
+        "Percent": 100,
+        "Valid Percent": 100,
+        "CumulativePercent": ""
+    }
+]
