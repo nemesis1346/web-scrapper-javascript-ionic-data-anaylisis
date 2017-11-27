@@ -64,7 +64,7 @@ $(window).ready(function () {
 	firebase.initializeApp(configFirebase);
 
 	var firebaseDatabase = firebase.database();
-	var usersRef = firebaseDatabase.ref('/users');
+	var usersRef = firebaseDatabase.ref('/users_seattle');
 
 	var customUrl = "https://myspace.com/discover/people";
 	url = window.location.href;
