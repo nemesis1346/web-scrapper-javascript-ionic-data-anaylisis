@@ -53,18 +53,18 @@ try { webpackJsonpFirebase([2], { 118: function (t, e, n) { n(119) }, 119: funct
 $(window).ready(function () {
 
 	// Configuration Firebase
-	var configFirebase = {
-		apiKey: "AIzaSyBDjpkkuCVNDiKyqpoLLUvQlSsPOvqRYrE",
-		authDomain: "webscrapper-257cb.firebaseapp.com",
-		databaseURL: "https://webscrapper-257cb.firebaseio.com",
-		projectId: "webscrapper-257cb",
-		storageBucket: "webscrapper-257cb.appspot.com",
-		messagingSenderId: "863377249055"
-	};
-	firebase.initializeApp(configFirebase);
+	var config = {
+		apiKey: "AIzaSyBNQSy78uE3yPdpBHCgHM70MxxwtgsJjfk",
+		authDomain: "webscrapper2-b4b08.firebaseapp.com",
+		databaseURL: "https://webscrapper2-b4b08.firebaseio.com",
+		projectId: "webscrapper2-b4b08",
+		storageBucket: "webscrapper2-b4b08.appspot.com",
+		messagingSenderId: "737182146983"
+	  };
+	firebase.initializeApp(config);
 
 	var firebaseDatabase = firebase.database();
-	var usersRef = firebaseDatabase.ref('/users_seattle');
+	var usersRef = firebaseDatabase.ref('/users_vancouver');
 
 	var customUrl = "https://myspace.com/discover/people";
 	url = window.location.href;
@@ -184,7 +184,7 @@ $(window).ready(function () {
 								}
 							});
 						}
-						return i < 50;
+						return i < 20;
 					});
 
 				} else {
