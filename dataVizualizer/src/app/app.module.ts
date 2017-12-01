@@ -7,15 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DataSourceProvider } from '../providers/data-source/data-source';
-import {MusicGenrePage} from '../pages/music-genre/music-genre';
 import { HttpModule } from '@angular/http';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    MusicGenrePage
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -25,8 +23,7 @@ import { HttpModule } from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    MusicGenrePage
+    HomePage
   ],
   providers: [
     StatusBar,

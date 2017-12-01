@@ -3,12 +3,6 @@
   <ion-navbar hideBackButton>
     <ion-toolbar class="toolbar toolbar-ios" no-border-top="">
       <div class="toolbar-background-ios"></div>
-      <button ion-button="" menutoggle="" right="" (click)="toggleMenu()" class="disable-hover bar-buttons bar-buttons-ios bar-button bar-button-ios bar-button-default bar-button-default-ios bar-button-menutoggle bar-button-menutoggle-ios">
-        <span class="button-inner">
-          <ion-icon name="menu" role="img" class="icon icon-ios ion-ios-menu" aria-label="menu"></ion-icon>
-        </span>
-        <div class="button-effect"></div>
-      </button>
       <div class="toolbar-content toolbar-content-ios">
         <ion-title class="title title-ios">
           <div class="toolbar-title toolbar-title-ios">DATA-VISUALIZER</div>
@@ -19,27 +13,25 @@
 </ion-header>
 
 
-<ion-menu [content]="main_menu" type="overlay">
-  <ion-header class="main-menu-stc">
-    <h1>
-      <div class="sub-menu-title">
-        DATA-VISUALIZER
-      </div>
-    </h1>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <button class="item-menu" menuClose ion-item detail-none (click)="openMusicGenre()">Graph1</button>
-      <button class="item-menu" menuClose ion-item detail-none>Graph2</button>
-      <button class="item-menu" menuClose ion-item detail-none>Graph3</button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-<ion-nav #main_menu [root]="main_menu_event"></ion-nav>
-
-
 <ion-content padding>
   <div class="main-content">
-
+    <ion-list radio-group [(ngModel)]="city">
+      <ion-item>
+        <ion-label>Chicago</ion-label>
+        <ion-radio value="Chicago" (click)="onSelectCity(city)"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>New York</ion-label>
+        <ion-radio value="NewYork" (click)="onSelectCity(city)"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Seattle</ion-label>
+        <ion-radio value="Seattle" (click)="onSelectCity(city)"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Toronto</ion-label>
+        <ion-radio value="Toronto" (click)="onSelectCity(city)"></ion-radio>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
