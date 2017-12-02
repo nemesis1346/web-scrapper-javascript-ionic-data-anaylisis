@@ -25,7 +25,13 @@ export const Data: ChartData[] = [
   { label: "Religious", value: 0.10 },
   { label: "Jazz", value: 0.13 },
   { label: "Classical", value: 0.15 },
-  { label: "Folk", value: 0.13 }
+  { label: "Folk", value: 0.13 },
+  { label: "whatever1", value: 0.50 },
+  { label: "whatever2", value: 0.50 },
+  { label: "whatever3", value: 0.50 },
+  { label: "whatever4", value: 0.50 },
+  { label: "whatever5", value: 0.50 },
+  { label: "whatever6", value: 0.50 }
 ]
 
 @Component({
@@ -67,10 +73,10 @@ export class HomePage {
   //GRAPHS
 
   initializeGraphs() {
-  //  this.initMusicGenre();
-   // this.initAgeGroup();
-    this.initGeneric("#barChart",900,500,40,20,20,30,Data,"MusicData");
-    this.initGeneric("#barChart2",900,500,40,20,20,30,Data,"MusicData");
+    //  this.initMusicGenre();
+    // this.initAgeGroup();
+    this.initGeneric("#barChart", 900, 500, 40, 20, 20, 30, Data, "MusicData", "horizontal", 20, 0.3);
+    this.initGeneric("#barChart2", 900, 500, 40, 20, 20, 30, Data, "MusicData", "vertical", 20, 0.3);
   }
 
   //GENERIC
@@ -79,83 +85,101 @@ export class HomePage {
     svgHeight: number,
     marginLeft: number,
     marginTop: number,
-    marginRight:number,
-    marginBottom:number,
+    marginRight: number,
+    marginBottom: number,
     data: ChartData[],
-    chartText: string) {
+    chartText: string, orientation: string,
+    frecuency: number, padding: number) {
+    //VARIABLES
+    var width, height, g, svg, x, y;
 
-    var width = svgWidth -marginLeft-marginRight;
-    var height=svgHeight-marginTop-marginBottom;
+    width = svgWidth - marginLeft - marginRight;
+    height = svgHeight - marginTop - marginBottom;
     //INIT SVG
-     var svg = d3.select(htmlContainer)
+    svg = d3.select(htmlContainer)
       .append("svg")
       .attr("width", "100%")
       .attr("height", "100%")
       .attr("viewBox", "0 0 " + svgWidth + " " + svgHeight);
-     var g = svg.append("g")
+    g = svg.append("g")
       .attr("transform", "translate(" + marginLeft + "," + marginTop + ")");
 
     //INIT AXIS
-    var x = d3Scale.scaleBand().rangeRound([0, width]).padding(0.1);
-    var y = d3Scale.scaleLinear().rangeRound([height, 0]);
-    x.domain(data.map((d) => d.label));
-    y.domain([0, d3Array.max(data, (d) => d.value)]);
+    if (orientation == "vertical") {
+      x = d3Scale.scaleBand().rangeRound([0, width]).padding(padding);
+      y = d3Scale.scaleLinear().rangeRound([height, 0]);
+      x.domain(data.map((d) => d.label));
+      y.domain([0, d3Array.max(data, (d) => d.value)]);
+      console.log("vertical")
+      console.log(y);
+      console.log(x);
+    } else {
+      y = d3Scale.scaleBand().rangeRound([0, width]).padding(padding);
+      x = d3Scale.scaleLinear().rangeRound([height, 0]);
+      y.domain(data.map((d) => d.label));
+      x.domain([0, d3Array.max(data, (d) => d.value)]);
+      console.log("horizontal")      
+      console.log(y);
+      console.log(x);
+    }
 
     //DRAW AXIS
-    g.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3Axis.axisBottom(x));
-    g.append("g")
-      .attr("class", "axis axis--y")
-      .call(d3Axis.axisLeft(y).ticks(10, "%"))
-      .append("text")
-      .attr("class", "axis-title")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("text-anchor", "end")
-      .text(chartText);
+    if (orientation == "vertical") {
+      g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3Axis.axisBottom(x));
+      g.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3Axis.axisLeft(y).ticks(frecuency, "%"))
+        .append("text")
+        .attr("class", "axis-title")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text(chartText);
+    } else {
+      
+      g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(600,900)")
+        .call(d3Axis.axisLeft(x).ticks(frecuency, "%"));
+        console.log(y);
+        console.log(x);
+      g.append("g")
+        .attr("class", "axis axis--y")
+       // .attr("transform", "translate(150,0)") 
+        // .attr(d3Axis.axisBottom(y).ticks(frecuency, "%"))
+        .append("text")
+        .attr("class", "axis-title")
+        .attr("transform", "rotate(90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text(chartText)
+    }
 
     //DRAW BARS
-    g.selectAll(".bar")
-      .data(data)
-      .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", (d) => x(d.label))
-      .attr("y", (d) => y(d.value))
-      .attr("width", x.bandwidth())
-      .attr("height", (d) => +height - y(d.value));
+    if (orientation == "vertical") {
+      g.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", (d) => x(d.label))
+        .attr("y", (d) => y(d.value))
+        .attr("width", x.bandwidth())
+        .attr("height", (d) => height - y(d.value));
+    } else {
+      g.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", (d) => x(d.value))
+        .attr("y", (d) => y(d.label))
+        .attr("width", (d) => width - x(d.value))
+        .attr("height", y.bandwidth());
+    }
+
   }
-
-    //Vertical
-  //INITIALIZE MUSIC GENRE BAR GRAPH
-  initMusicGenre() {
-    
-        //     //INIT SVG
-        //     this.svgMusicGenre=d3.select("#musicGenre")
-        //     .append("svgMusicGenre")
-        //     .attr("width","100%")
-        //     .attr("heigth","100%")
-        //     .attr('viewBox','0 0 900 500');
-        //     this.gMusicGenre=this.svgMusicGenre.append("gMusicGenre")
-        //     .attr("transform","translate(" + this.marginMusicGenre.left + "," + this.marginMusicGenre.top + ")");
-    
-        //     //INIT AXIS
-        //     this.yMusicGenre=d3Scale.scaleBand().rangeRound([0,this.heightMusicGenre]).padding(0.1);
-        //    this.xMusicGenre=d3Scale.scaleLinear().rangeRound([this.widthMusicGenre]); 
-        //   this.yMusicGenre.domain(StatsBarChart.map((d)=>d.musicGenre));
-        //   this.xMusicGenre.domain([0,d3Array.max(StatsBarChart,(d)=>d.percentage)]);
-    
-        //    //DRAW AXIS
-        //    this.g.append("gMusicGenre")
-        //    .attr("class","axis axis--x")
-        //   .attr("transform","translate(0," + this.widthMusicGenre + ")")
-        // .call(d3Axis.axisLeft(this.xMusicGenre));
-        // this.g.append("gMusicGenre")
-        // .attr("class","axis axis--y")
-        // .attr(d3Axis.axisBottom()
-        //     //DRAW BARS
-      }
-
 }
