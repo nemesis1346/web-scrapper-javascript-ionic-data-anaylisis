@@ -70,7 +70,7 @@ export class HomePage {
     //  this.initMusicGenre();
     // this.initAgeGroup();
     this.initGeneric("#barChart", 500, 900, 40, 20, 20, 30, Data, "MusicData", "horizontal", 20, 0.3);
-    this.initGeneric("#barChart2", 900, 500, 40, 20, 20, 30, Data, "MusicData", "vertical", 20, 0.3);
+    this.initGeneric("#barChart2", 900, 500, 40, 40, 40, 40, Data, "MusicData", "vertical", 20, 0.1);
   }
 
   //GENERIC
@@ -103,9 +103,9 @@ export class HomePage {
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("viewBox", "0 0 " + svgHeight + " " + svgWidth);
+        .attr("viewBox", "0 0 " + svgHeight + " " + svgWidth); //this is ok dont change it
       g = svg.append("g")
-        .attr("transform", "translate(" + marginTop + "," + marginLeft + ")");
+        .attr("transform", "translate(" + marginBottom + "," + marginRight + ")");
     }
 
     //INIT AXIS
@@ -115,8 +115,8 @@ export class HomePage {
       x.domain(data.map((d) => d.label));
       y.domain([0, d3Array.max(data, (d) => d.value)]);
     } else {
-      y = d3Scale.scaleBand().rangeRound([0, width]).padding(padding);
-      x = d3Scale.scaleLinear().rangeRound([height, 0]);
+      y = d3Scale.scaleBand().rangeRound([0,height]).padding(padding);
+      x = d3Scale.scaleLinear().rangeRound([0, width]);
       y.domain(data.map((d) => d.label));
       x.domain([0, d3Array.max(data, (d) => d.value)]);
     }
@@ -141,16 +141,17 @@ export class HomePage {
 
       g.append("g")
         .attr("class", "axis axis--x")
+       // .attr("transform", "translate(600,900)")
         .call(d3Axis.axisLeft(y).ticks(frecuency, "%"));
       g.append("g")
         .attr("class", "axis axis--y")
-        .attr("transform", "translate(0,900)")
-        // .attr(d3Axis.axisBottom(y).ticks(frecuency, "%"))
+      //  .attr("transform", "translate(0," + height + ")")
+       //  .attr(d3Axis.axisBottom(x))
         .append("text")
         .attr("class", "axis-title")
         .attr("transform", "rotate(90)")
         .attr("y", 6)
-        .attr("dy", "0.71em")
+               .attr("dy", "0.71em")
         .attr("text-anchor", "end")
         .text(chartText)
     }
