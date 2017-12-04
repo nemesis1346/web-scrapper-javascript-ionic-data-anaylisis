@@ -180,7 +180,7 @@ export class HomePage {
 
   }
 
-  initGenericPie(radius:number, width: number,
+  initGenericPie(htmlContainer:string,radius:number, width: number,
     height: number) {
     //variables
     var color, arc, labelArc, pie,svg, g;
@@ -201,7 +201,7 @@ export class HomePage {
     .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");;
     */
     //this.svg = d3.select("svg")
-    svg = d3.select("#pieChart")
+    svg = d3.select(htmlContainer)
       .append("svg")
       .attr("width", '100%')
       .attr("height", '100%')
