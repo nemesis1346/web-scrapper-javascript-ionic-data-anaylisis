@@ -6,7 +6,7 @@ import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
 import d3scription from 'd3scription';
-
+import {DataSourceProvider} from "../../providers/data-source/data-source";
 export interface ChartData {
   label: string,
   value: number
@@ -64,9 +64,12 @@ export const MusicGenre: ChartData[] = [
   templateUrl: 'home.html'
 })
 export class HomePage {
+  private listData:ChartData[];
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
-    public alertController: AlertController) {
+    public alertController: AlertController,
+  public dataSourceProvider:DataSourceProvider) {
+    this.listData=[];
   }
 
   ionViewDidLoad() {
@@ -93,6 +96,20 @@ export class HomePage {
     });
     alert.present();
   }
+    //Function to make new request
+    onMouseover(d, i) {
+      console.log(d);
+    }
+  
+    requestData(city:string, parameter:string){
+      this.dataSourceProvider.getData(city,parameter).subscribe((resp) => {
+        //convert each response in list
+        //this.listData
+        this.initializeGraphs();
+      }, (err) => {
+        console.log("Error");
+      });
+    }
 
   //GRAPHS
   initializeGraphs() {
@@ -226,15 +243,6 @@ export class HomePage {
     // })
 
   }
-  //Function to make new request
-  onMouseover(d, i) {
-    console.log(d);
-  }
-
-  requestData(city:string, parameter:string){
-
-  }
-
   initGenericPie(htmlContainer: string,
     svgWidth: number,
     svgHeight: number, data: ChartData[],
