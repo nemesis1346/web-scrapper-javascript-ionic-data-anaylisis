@@ -10,7 +10,36 @@ export interface ChartData {
   label: string,
   value: number
 }
-export const Data: ChartData[] = [
+export const Profession: ChartData[] = [
+  { label: "Musician", value: 0.40 },
+  { label: "Designer", value: 0.20 },
+  { label: "Photographer", value: 0.30 },
+  { label: "Artist", value: 0.10 },
+  { label: "Producer", value: 0.20 },
+  { label: "Filmmaker", value: 0.20 },
+  { label: "Producer", value: 0.20 },
+  { label: "Writer", value: 0.20 },
+  { label: "Comedian", value: 0.20 },
+  { label: "Actor", value: 0.20 },
+  { label: "Model", value: 0.20 },
+  { label: "Promoter", value: 0.20 },
+  { label: "Venue", value: 0.20 },
+  { label: "Brand", value: 0.20 },
+  { label: "Developer", value: 0.20 },
+  { label: "Entrepreneur", value: 0.20 },
+  { label: "Curator", value: 0.20 },
+  { label: "Dancer", value: 0.20 },
+  { label: "Athlete", value: 0.20 },
+  { label: "Activits", value: 0.20 }];
+export const AgeGroup: ChartData[] = [
+  { label: "Age(18-26)", value: 0.90 },
+  { label: "Age(27-35)", value: 0.30 },
+  { label: "Age(36-42)", value: 0.40 },
+  { label: "Age(43-50+)", value: 0.60 }];
+export const Genre: ChartData[] = [
+  { label: "Male", value: 0.80 },
+  { label: "Female", value: 0.20 }];
+export const MusicGenre: ChartData[] = [
   { label: "AllGenres", value: 0.67 },
   { label: "Pop", value: 0.92 },
   { label: "Rap&HipHop", value: 0.82 },
@@ -66,13 +95,11 @@ export class HomePage {
   }
 
   //GRAPHS
-
   initializeGraphs() {
-    //  this.initMusicGenre();
-    // this.initAgeGroup();
-    this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, Data, "MusicData", "horizontal", 10, 0.3);
-    this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 10, 0.3);
-    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 20, 0.3);
+    this.initGenericPie("#barGenre", 900, 500, Genre, 50, 20, 20, 30);
+    this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, Profession, "MusicData", "horizontal", 10, 0.3);
+    this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, MusicGenre, "MusicData", "vertical", 10, 0.3);
+    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, AgeGroup, "MusicData", "vertical", 20, 0.3);
   }
 
   //GENERIC
@@ -180,10 +207,20 @@ export class HomePage {
 
   }
 
-  initGenericPie(htmlContainer:string,radius:number, width: number,
-    height: number) {
+  initGenericPie(htmlContainer: string,
+    svgWidth: number,
+    svgHeight: number, data: ChartData[],
+    marginLeft: number,
+    marginRight: number,
+    marginTop: number,
+    marginBottom: number) {
     //variables
-    var color, arc, labelArc, pie,svg, g;
+    var radius, color, arc, labelArc, pie, svg, g, width, height;
+
+    width = svgWidth - marginLeft - marginRight;
+    height = svgHeight - marginTop - marginBottom;
+    radius = Math.min(width, height) / 2;
+
     color = d3Scale.scaleOrdinal()
       .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
     arc = d3Shape.arc()
@@ -194,7 +231,7 @@ export class HomePage {
       .innerRadius(radius - 40);
     pie = d3Shape.pie()
       .sort(null)
-      .value((d: any) => d.population);
+      .value((d: any) => d.value);
     /*
     this.svg = d3.select("svg")
     .append("g")
@@ -205,19 +242,19 @@ export class HomePage {
       .append("svg")
       .attr("width", '100%')
       .attr("height", '100%')
-      .attr('viewBox', '0 0 ' + Math.min(width, height) + ' ' + Math.min(width,height))
+      .attr('viewBox', '0 0 ' + Math.min(width, height) + ' ' + Math.min(width, height))
       .append("g")
       .attr("transform", "translate(" + Math.min(width, height) / 2 + "," + Math.min(width, height) / 2 + ")");
 
-    //console.log(this.listData);
-     g = svg.selectAll(".arc")
-      //.data(pie(this.listData))
+    console.log(data);
+    g = svg.selectAll(".arc")
+      .data(pie(data))
       .enter().append("g")
       .attr("class", "arc");
     g.append("path").attr("d", arc)
-      .style("fill", (d: any) => color(d.data.age));
+      .style("fill", (d: any) => color(d.data.value));
     g.append("text").attr("transform", (d: any) => "translate(" + labelArc.centroid(d) + ")")
       .attr("dy", ".35em")
-      .text((d: any) => d.data.age);
+      .text((d: any) => d.data.value);
   }
 }
