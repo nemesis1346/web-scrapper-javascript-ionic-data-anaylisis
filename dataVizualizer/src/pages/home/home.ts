@@ -4,6 +4,7 @@ import * as d3 from 'd3-selection';
 import * as d3Scale from "d3-scale";
 import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
+import * as d3Shape from "d3-shape";
 
 export interface ChartData {
   label: string,
@@ -69,14 +70,13 @@ export class HomePage {
   initializeGraphs() {
     //  this.initMusicGenre();
     // this.initAgeGroup();
-    this.initGeneric("#barProfession", 600, 800, 70, 20, 20, 30, Data, "MusicData", "horizontal", 10, 0.3);
-    this.initGeneric("#barMusicGenre", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 10, 0.3);
-    this.initGeneric("#barAgeGroup", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 20, 0.3);
-    
+    this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, Data, "MusicData", "horizontal", 10, 0.3);
+    this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 10, 0.3);
+    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 20, 0.3);
   }
 
   //GENERIC
-  initGeneric(htmlContainer: string,
+  initGeneric(graph: string, htmlContainer: string,
     svgWidth: number,
     svgHeight: number,
     marginLeft: number,
@@ -140,7 +140,6 @@ export class HomePage {
         .attr("text-anchor", "end")
         .text(chartText);
     } else {
-
       g.append("g")
         .attr("class", "axis axis--y")
         // .attr("transform", "translate(600,900)")
@@ -179,5 +178,46 @@ export class HomePage {
         .attr("height", y.bandwidth());
     }
 
+  }
+
+  initGenericPie(radius:number, width: number,
+    height: number) {
+    //variables
+    var color, arc, labelArc, pie,svg, g;
+    color = d3Scale.scaleOrdinal()
+      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    arc = d3Shape.arc()
+      .outerRadius(radius - 10)
+      .innerRadius(0);
+    labelArc = d3Shape.arc()
+      .outerRadius(radius - 40)
+      .innerRadius(radius - 40);
+    pie = d3Shape.pie()
+      .sort(null)
+      .value((d: any) => d.population);
+    /*
+    this.svg = d3.select("svg")
+    .append("g")
+    .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");;
+    */
+    //this.svg = d3.select("svg")
+    svg = d3.select("#pieChart")
+      .append("svg")
+      .attr("width", '100%')
+      .attr("height", '100%')
+      .attr('viewBox', '0 0 ' + Math.min(width, height) + ' ' + Math.min(width,height))
+      .append("g")
+      .attr("transform", "translate(" + Math.min(width, height) / 2 + "," + Math.min(width, height) / 2 + ")");
+
+    //console.log(this.listData);
+     g = svg.selectAll(".arc")
+      //.data(pie(this.listData))
+      .enter().append("g")
+      .attr("class", "arc");
+    g.append("path").attr("d", arc)
+      .style("fill", (d: any) => color(d.data.age));
+    g.append("text").attr("transform", (d: any) => "translate(" + labelArc.centroid(d) + ")")
+      .attr("dy", ".35em")
+      .text((d: any) => d.data.age);
   }
 }
