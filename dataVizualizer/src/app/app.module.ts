@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { DataSourceProvider } from '../providers/data-source/data-source';
 import { HttpModule } from '@angular/http';
 import { ApiProvider } from '../providers/api/api';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,8 +20,9 @@ import { ApiProvider } from '../providers/api/api';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule  
-  ],
+    HttpModule  ,
+    HttpClientModule
+    ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -31,7 +33,10 @@ import { ApiProvider } from '../providers/api/api';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataSourceProvider,
-    ApiProvider
+    ApiProvider,
+    HttpClientModule,
+    HttpClient,
+    HttpModule
   ]
 })
 export class AppModule {}

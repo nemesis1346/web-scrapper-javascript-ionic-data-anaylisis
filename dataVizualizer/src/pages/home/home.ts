@@ -6,7 +6,7 @@ import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
 import d3scription from 'd3scription';
-import {DataSourceProvider} from "../../providers/data-source/data-source";
+import { DataSourceProvider } from "../../providers/data-source/data-source";
 export interface ChartData {
   label: string,
   value: number
@@ -64,12 +64,14 @@ export const MusicGenre: ChartData[] = [
   templateUrl: 'home.html'
 })
 export class HomePage {
-  private listData:ChartData[];
+  private listData: ChartData[];
+  private city: any;
+  private param: any;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertController: AlertController,
-  public dataSourceProvider:DataSourceProvider) {
-    this.listData=[];
+    public dataSourceProvider: DataSourceProvider) {
+    this.listData = [];
   }
 
   ionViewDidLoad() {
@@ -96,20 +98,26 @@ export class HomePage {
     });
     alert.present();
   }
-    //Function to make new request
-    onMouseover(d, i) {
-      console.log(d);
-    }
-  
-    requestData(city:string, parameter:string){
-      this.dataSourceProvider.getData(city,parameter).subscribe((resp) => {
-        //convert each response in list
-        //this.listData
-        this.initializeGraphs();
-      }, (err) => {
-        console.log("Error");
-      });
-    }
+  //Function to make new request
+  onMouseover(d, i) {
+    console.log(d.value);
+    console.log(i);
+    
+    //this.requestDataByParam(this.city,);
+  }
+  requestDataByCity(city:string){
+
+  }
+
+  requestDataByParam(city: string, parameter: string) {
+    this.dataSourceProvider.getData(city, parameter).subscribe((resp) => {
+      //convert each response in list
+      //this.listData
+      this.initializeGraphs();
+    }, (err) => {
+      console.log("Error");
+    });
+  }
 
   //GRAPHS
   initializeGraphs() {
@@ -209,7 +217,7 @@ export class HomePage {
     //DRAW BARS
     var dataSelection;
     if (orientation == "vertical") {
-       g.selectAll(".bar")
+      g.selectAll(".bar")
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
@@ -227,7 +235,18 @@ export class HomePage {
         .attr("y", (d) => y(d.label))
         .attr("width", (d) => width - x(d.value))
         .attr("height", y.bandwidth())
-        .on('mouseover', this.onMouseover);;
+        .on('mouseover',  function(){
+          console.log(this);
+          d3.select(this)
+            .style("fill", "aqua");
+               // Get current event info
+          console.log(d3.event);
+          this.onMouseover;
+          
+        });
+        //.on('mouseover', this.onMouseover);;
+
+       
     }
     // dataSelection.enter()
     //   .append('circle')

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response ,Headers} from '@angular/http';
 import 'rxjs/Rx';
 import { ApiProvider } from '../api/api';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataSourceProvider {
 
-  constructor(public httpGeneral: Http, public apiProvider: ApiProvider) {
+  constructor(public httpGeneral: Http, public apiProvider: ApiProvider,private httpClient: HttpClient) {
     console.log('Hello DataSourceProvider Provider');
   }
 
