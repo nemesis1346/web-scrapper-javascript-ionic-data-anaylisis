@@ -69,8 +69,10 @@ export class HomePage {
   initializeGraphs() {
     //  this.initMusicGenre();
     // this.initAgeGroup();
-    this.initGeneric("#barChart", 500, 900, 40, 20, 20, 30, Data, "MusicData", "horizontal", 20, 0.3);
-    this.initGeneric("#barChart2", 900, 500, 40, 40, 40, 40, Data, "MusicData", "vertical", 20, 0.1);
+    this.initGeneric("#barProfession", 600, 800, 70, 20, 20, 30, Data, "MusicData", "horizontal", 10, 0.3);
+    this.initGeneric("#barMusicGenre", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 10, 0.3);
+    this.initGeneric("#barAgeGroup", 900, 500, 40, 20, 40, 40, Data, "MusicData", "vertical", 20, 0.3);
+    
   }
 
   //GENERIC
@@ -103,9 +105,9 @@ export class HomePage {
         .append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("viewBox", "0 0 " + svgHeight + " " + svgWidth); //this is ok dont change it
+        .attr("viewBox", "0 0 " + svgWidth + " " + svgHeight); //this is ok dont change it
       g = svg.append("g")
-        .attr("transform", "translate(" + marginBottom + "," + marginRight + ")");
+        .attr("transform", "translate(" + marginLeft + "," + marginTop + ")");
     }
 
     //INIT AXIS
@@ -113,12 +115,12 @@ export class HomePage {
       x = d3Scale.scaleBand().rangeRound([0, width]).padding(padding);
       y = d3Scale.scaleLinear().rangeRound([height, 0]);
       x.domain(data.map((d) => d.label));
-      y.domain([0, d3Array.max(data, (d) => d.value)]);
+      y.domain([0, 1]);
     } else {
-      y = d3Scale.scaleBand().rangeRound([0,height]).padding(padding);
+      y = d3Scale.scaleBand().rangeRound([0, height]).padding(padding);
       x = d3Scale.scaleLinear().rangeRound([0, width]);
       y.domain(data.map((d) => d.label));
-      x.domain([0, d3Array.max(data, (d) => d.value)]);
+      x.domain([1, 0]);
     }
 
     //DRAW AXIS
@@ -140,18 +142,18 @@ export class HomePage {
     } else {
 
       g.append("g")
-        .attr("class", "axis axis--x")
-       // .attr("transform", "translate(600,900)")
-        .call(d3Axis.axisLeft(y).ticks(frecuency, "%"));
-      g.append("g")
         .attr("class", "axis axis--y")
-      //  .attr("transform", "translate(0," + height + ")")
-       //  .attr(d3Axis.axisBottom(x))
+        // .attr("transform", "translate(600,900)")
+        .call(d3Axis.axisLeft(y));
+      g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3Axis.axisBottom(x).ticks(frecuency, "%"))
         .append("text")
         .attr("class", "axis-title")
-        .attr("transform", "rotate(90)")
+        .attr("transform", "rotate(0)")
         .attr("y", 6)
-               .attr("dy", "0.71em")
+        .attr("dy", "0.71em")
         .attr("text-anchor", "end")
         .text(chartText)
     }

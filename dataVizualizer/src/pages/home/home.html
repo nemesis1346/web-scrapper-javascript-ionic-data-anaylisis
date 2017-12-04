@@ -12,29 +12,43 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <div class="main-content">
-    <ion-list radio-group [(ngModel)]="city">
-      <ion-item>
-        <ion-label>Chicago</ion-label>
-        <ion-radio value="Chicago" (click)="onSelectCity(city)"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>New York</ion-label>
-        <ion-radio value="NewYork" (click)="onSelectCity(city)"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Seattle</ion-label>
-        <ion-radio value="Seattle" (click)="onSelectCity(city)"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>Toronto</ion-label>
-        <ion-radio value="Toronto" (click)="onSelectCity(city)"></ion-radio>
-      </ion-item>
-    </ion-list>
+  <div class="main-container">
+    <div class="left-container">
+      <div id="barProfession"></div>
+    </div>
+    <div class="right-container">
+      <div class="right-first">
+        <div id="barGenre" class="barGenre"></div>
+        <div id="barAgeGroup" class="barAgeGroup"></div>
+      </div>
+      <div class="right-second">
+        <div id="citySelector">
+          <div class="main-content">
+            <ion-list radio-group [(ngModel)]="city">
+              <ion-item>
+                <ion-label>Chicago</ion-label>
+                <ion-radio value="Chicago" (click)="onSelectCity(city)"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>New York</ion-label>
+                <ion-radio value="NewYork" (click)="onSelectCity(city)"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Seattle</ion-label>
+                <ion-radio value="Seattle" (click)="onSelectCity(city)"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Toronto</ion-label>
+                <ion-radio value="Toronto" (click)="onSelectCity(city)"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+      <div class="right-third">
+        <div id="barMusicGenre"></div>
+      </div>
+    </div>
   </div>
-
-  <div id="barChart"></div>
-  <div id="barChart2"></div>
 </ion-content>
