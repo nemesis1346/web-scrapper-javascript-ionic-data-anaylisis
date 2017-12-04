@@ -5,7 +5,6 @@ import * as d3Scale from "d3-scale";
 import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
-import d3scription from 'd3scription';
 import { DataSourceProvider } from "../../providers/data-source/data-source";
 export interface ChartData {
   label: string,
@@ -67,12 +66,14 @@ export class HomePage {
   private listData: ChartData[];
   private city: any;
   private param: any;
+  private barTypeRequest:any;
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertController: AlertController,
     public dataSourceProvider: DataSourceProvider) {
     this.listData = [];
-  }
+    this.barTypeRequest="";
+    }
 
   ionViewDidLoad() {
     this.initializeGraphs();
@@ -99,8 +100,9 @@ export class HomePage {
     alert.present();
   }
   //Function to make new request
-  onMouseover(d, i) {
-    console.log(d.value);
+  onMouseover(d,i) {
+    console.log(this.barTypeRequest);
+    console.log(d);
     console.log(i);
     
     //this.requestDataByParam(this.city,);
@@ -186,8 +188,6 @@ export class HomePage {
       g.append("g")
         .attr("class", "axis axis--y")
         .call(d3Axis.axisLeft(y).ticks(frecuency, "%"))
-        //.on('mouseover', tip.show)
-        //.on('mouseout', tip.hide)
         .append("text")
         .attr("class", "axis-title")
         .attr("transform", "rotate(-90)")
@@ -203,8 +203,6 @@ export class HomePage {
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
         .call(d3Axis.axisBottom(x).ticks(frecuency, "%"))
-        // .on('mouseover', tip.show)
-        //.on('mouseout', tip.hide)
         .append("text")
         .attr("class", "axis-title")
         .attr("transform", "rotate(0)")
@@ -225,7 +223,15 @@ export class HomePage {
         .attr("y", (d) => y(d.value))
         .attr("width", x.bandwidth())
         .attr("height", (d) => height - y(d.value))
-        .on('mouseover', this.onMouseover);;
+        .on("mouseover",function(){
+          d3.select(this)
+          .style("fill", "aqua");
+        })
+        .on("mouseout",function(){
+          d3.select(this)
+          .style("fill", "black");
+        });
+        //.on('mouseover', this.onMouseover);;
     } else {
       g.selectAll(".bar")
         .data(data)
@@ -235,18 +241,20 @@ export class HomePage {
         .attr("y", (d) => y(d.label))
         .attr("width", (d) => width - x(d.value))
         .attr("height", y.bandwidth())
-        .on('mouseover',  function(){
-          console.log(this);
-          d3.select(this)
-            .style("fill", "aqua");
-               // Get current event info
-          console.log(d3.event);
-          this.onMouseover;
-          
-        });
-        //.on('mouseover', this.onMouseover);;
-
-       
+        // .on("mouseover",  function(d,i){
+        // // console.log(this);
+        //   d3.select(this)
+        //     .style("fill", "aqua");
+        //        // Get current event info
+        //        this.barTypeRequest=chartText;
+        //  // console.log(d3.event);
+        //   this.onMouseover;
+        // })
+        // .on("mouseout",function(){
+        //   d3.select(this)
+        //   .style("fill", "black");
+        // });
+        .on('mouseover', this.onMouseover);;
     }
     // dataSelection.enter()
     //   .append('circle')
@@ -301,7 +309,19 @@ export class HomePage {
       .enter().append("g")
       .attr("class", "arc");
     g.append("path").attr("d", arc)
-      .style("fill", (d: any) => color(d.data.value));
+      .style("fill", (d: any) => color(d.data.value))
+      .on("mouseover",  function(){
+          console.log(this);
+          d3.select(this)
+            .style("fill", "aqua");
+               // Get current event info
+          console.log(d3.event);
+          //this.onMouseover;
+        })
+        .on("mouseout",function(){
+          d3.select(this)
+          .style("fill", (d: any) => color(d.data.value));
+        });
     g.append("text").attr("transform", (d: any) => "translate(" + labelArc.centroid(d) + ")")
       .attr("dy", ".35em")
       .text((d: any) => d.data.value);
