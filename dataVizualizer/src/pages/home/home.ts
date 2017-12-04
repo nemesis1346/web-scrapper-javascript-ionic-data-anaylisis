@@ -70,7 +70,6 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    //console.log("ionViewDidLoad Bar Chart");
     this.initializeGraphs();
   }
 
@@ -230,6 +229,10 @@ export class HomePage {
   //Function to make new request
   onMouseover(d, i) {
     console.log(d);
+  }
+
+  requestData(city:string, parameter:string){
+
   }
 
   initGenericPie(htmlContainer: string,
