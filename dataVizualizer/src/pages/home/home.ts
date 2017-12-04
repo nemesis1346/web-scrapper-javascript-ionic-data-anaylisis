@@ -5,6 +5,7 @@ import * as d3Scale from "d3-scale";
 import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
+import d3scription from 'd3scription';
 
 export interface ChartData {
   label: string,
@@ -99,7 +100,7 @@ export class HomePage {
     this.initGenericPie("#barGenre", 900, 500, Genre, 50, 20, 20, 30);
     this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, Profession, "MusicData", "horizontal", 10, 0.3);
     this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, MusicGenre, "MusicData", "vertical", 10, 0.3);
-    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, AgeGroup, "MusicData", "vertical", 20, 0.3);
+    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, AgeGroup, "MusicData", "vertical", 10, 0.3);
   }
 
   //GENERIC
@@ -149,7 +150,9 @@ export class HomePage {
       y.domain(data.map((d) => d.label));
       x.domain([1, 0]);
     }
-
+    //var tipFactory = d3scription((d : ChartData) => d.label);
+    //var tip = tipFactory()
+    //.element(g);
     //DRAW AXIS
     if (orientation == "vertical") {
       g.append("g")
@@ -159,6 +162,8 @@ export class HomePage {
       g.append("g")
         .attr("class", "axis axis--y")
         .call(d3Axis.axisLeft(y).ticks(frecuency, "%"))
+        //.on('mouseover', tip.show)
+        //.on('mouseout', tip.hide)
         .append("text")
         .attr("class", "axis-title")
         .attr("transform", "rotate(-90)")
@@ -169,12 +174,13 @@ export class HomePage {
     } else {
       g.append("g")
         .attr("class", "axis axis--y")
-        // .attr("transform", "translate(600,900)")
         .call(d3Axis.axisLeft(y));
       g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
         .call(d3Axis.axisBottom(x).ticks(frecuency, "%"))
+        // .on('mouseover', tip.show)
+        //.on('mouseout', tip.hide)
         .append("text")
         .attr("class", "axis-title")
         .attr("transform", "rotate(0)")
@@ -185,15 +191,17 @@ export class HomePage {
     }
 
     //DRAW BARS
+    var dataSelection;
     if (orientation == "vertical") {
-      g.selectAll(".bar")
+       g.selectAll(".bar")
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
         .attr("x", (d) => x(d.label))
         .attr("y", (d) => y(d.value))
         .attr("width", x.bandwidth())
-        .attr("height", (d) => height - y(d.value));
+        .attr("height", (d) => height - y(d.value))
+        .on('mouseover', this.onMouseover);;
     } else {
       g.selectAll(".bar")
         .data(data)
@@ -202,9 +210,26 @@ export class HomePage {
         .attr("x", (d) => x(d.value))
         .attr("y", (d) => y(d.label))
         .attr("width", (d) => width - x(d.value))
-        .attr("height", y.bandwidth());
+        .attr("height", y.bandwidth())
+        .on('mouseover', this.onMouseover);;
     }
+    // dataSelection.enter()
+    //   .append('circle')
+    //   .classed('post', true)
+    //   .on('mouseover', this.onMouseover);
 
+    //Tips
+    // var tip = d3.tip()
+    // .attr('class', 'd3-tip')
+    // .offset([-10, 0])
+    // .html(function(d) {
+    //   return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
+    // })
+
+  }
+  //Function to make new request
+  onMouseover(d, i) {
+    console.log(d);
   }
 
   initGenericPie(htmlContainer: string,
@@ -232,12 +257,6 @@ export class HomePage {
     pie = d3Shape.pie()
       .sort(null)
       .value((d: any) => d.value);
-    /*
-    this.svg = d3.select("svg")
-    .append("g")
-    .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");;
-    */
-    //this.svg = d3.select("svg")
     svg = d3.select(htmlContainer)
       .append("svg")
       .attr("width", '100%')

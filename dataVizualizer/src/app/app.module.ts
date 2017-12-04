@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DataSourceProvider } from '../providers/data-source/data-source';
 import { HttpModule } from '@angular/http';
+import { ApiProvider } from '../providers/api/api';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HttpModule } from '@angular/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataSourceProvider
+    DataSourceProvider,
+    ApiProvider
   ]
 })
 export class AppModule {}
