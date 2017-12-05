@@ -5,26 +5,33 @@ import * as d3Scale from "d3-scale";
 import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
+import d3tip from 'd3tip';
 import { DataSourceProvider } from "../../providers/data-source/data-source";
 import { DataGeneral, DataModel } from "../../data/data"
 export interface ChartData {
   label: string,
   value: number
 }
-
+declare module D3 {
+  export interface Base {
+    tip: any;
+  }
+}
+declare var d3_tip: D3.Base;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
   private city: any;
   private param: any;
   private barTypeRequest: any;
-  private listFilteredLocation:DataModel[];
+  private listFilteredLocation: DataModel[];
   //Variables Genre
   private listResultGenre: ChartData[];
   private listGenreMale: DataModel[];
-  private listGenreFemale: DataModel[];  
+  private listGenreFemale: DataModel[];
   //Variables Age  
   private listResultAgeGroup: ChartData[];
   private listAgeGroup1: DataModel[];
@@ -51,7 +58,7 @@ export class HomePage {
   private listFolk: DataModel[];
   //Variables Profession
   private listResultProfession: ChartData[];
-  private listMember:DataModel[];
+  private listMember: DataModel[];
   private listMusician: DataModel[];
   private listDesigner: DataModel[];
   private listPhotographer: DataModel[];
@@ -85,7 +92,7 @@ export class HomePage {
 
   onSelectCity(city) {
     if (city && city != "") {
-      this.listFilteredLocation=[];
+      this.listFilteredLocation = [];
       //Genre
       this.listResultGenre = [];
       this.listGenreMale = [];
@@ -117,7 +124,7 @@ export class HomePage {
       this.listFolk = [];
       //Profession
       this.listResultProfession = [];
-      this.listMember=[];
+      this.listMember = [];
       this.listMusician = [];
       this.listDesigner = [];
       this.listPhotographer = [];
@@ -165,7 +172,7 @@ export class HomePage {
   }
   requestDataByCity(city: string) {
     DataGeneral.forEach(element => {
-      if(element.location==city){
+      if (element.location == city) {
         this.listFilteredLocation.push(element);
       }
     });
@@ -175,9 +182,9 @@ export class HomePage {
       if (element.genre == "male") {
         this.listGenreMale.push(element);
       }
-      if(element.genre=="female"){
+      if (element.genre == "female") {
         this.listGenreFemale.push(element);
-        
+
       }
       //Get Data AgeGroup
       if (element.age == "group1") {
@@ -242,7 +249,7 @@ export class HomePage {
         this.listFolk.push(element);
       }
       //Get Data Profession
-      if(element.profession=="Member"){
+      if (element.profession == "Member") {
         this.listMember.push(element);
       }
       if (element.profession == "Musician") {
@@ -375,10 +382,12 @@ export class HomePage {
 
   //GRAPHS
   initializeGraphs() {
+    d3.selectAll("svg").remove();
+
     this.initGenericPie("#barGenre", 900, 500, this.listResultGenre, 50, 20, 20, 30);
-    this.initGeneric("bar", "#barProfession", 600, 800, 100, 20, 20, 30, this.listResultProfession, "MusicData", "horizontal", 5, 0.3,"axis--x--profession","axis--y--profession");
-    this.initGeneric("bar", "#barMusicGenre", 900, 500, 60, 20, 40, 40, this.listResultMusicGenre, "MusicData", "vertical", 10, 0.3,"axis--x--musicGenre","axis--y--musicGenre");
-    this.initGeneric("bar", "#barAgeGroup", 900, 500, 60, 20, 40, 40, this.listResultAgeGroup, "MusicData", "vertical", 10, 0.3,"axis--x--ageGroup","axis--y--ageGroup");
+    this.initGeneric("bar", "#barProfession", 600, 860, 100, 5, 20, 30, this.listResultProfession, "MusicData", "horizontal", 5, 0.3, "axis--x--profession", "axis--y--profession");
+    this.initGeneric("bar", "#barMusicGenre", 500, 200, 60, 20, 40, 40, this.listResultMusicGenre, "MusicData", "vertical", 10, 0.3, "axis--x--musicGenre", "axis--y--musicGenre");
+    this.initGeneric("bar", "#barAgeGroup", 900, 500, 60, 20, 40, 40, this.listResultAgeGroup, "MusicData", "vertical", 10, 0.3, "axis--x--ageGroup", "axis--y--ageGroup");
   }
 
   //GENERIC
@@ -391,7 +400,7 @@ export class HomePage {
     marginBottom: number,
     data: ChartData[],
     chartText: string, orientation: string,
-    frecuency: number, padding: number,classCssX:string,classCssY:string) {
+    frecuency: number, padding: number, classCssX: string, classCssY: string) {
     //VARIABLES
     var width, height, g, svg, x, y;
 
@@ -421,22 +430,22 @@ export class HomePage {
       x = d3Scale.scaleBand().rangeRound([0, width]).padding(padding);
       y = d3Scale.scaleLinear().rangeRound([height, 0]);
       x.domain(data.map((d) => d.label));
-      y.domain([0, d3Array.max(data, (d) => d.value)+0.01]);
+      y.domain([0, d3Array.max(data, (d) => d.value) + 0.01]);
     } else {
       y = d3Scale.scaleBand().rangeRound([0, height]).padding(padding);
       x = d3Scale.scaleLinear().rangeRound([0, width]);
       y.domain(data.map((d) => d.label));
-      x.domain([d3Array.max(data, (d) => d.value)+0.01, 0]);
+      x.domain([d3Array.max(data, (d) => d.value) + 0.01, 0]);
     }
 
     //DRAW AXIS
     if (orientation == "vertical") {
       g.append("g")
-        .attr("class", "axis "+classCssX)
+        .attr("class", "axis " + classCssX)
         .attr("transform", "translate(0," + height + ")")
         .call(d3Axis.axisBottom(x));
       g.append("g")
-        .attr("class", "axis "+classCssY)
+        .attr("class", "axis " + classCssY)
         .call(d3Axis.axisLeft(y).ticks(frecuency, "%"))
         .append("text")
         .attr("class", "axis-title")
@@ -447,10 +456,10 @@ export class HomePage {
         .text(chartText);
     } else {
       g.append("g")
-        .attr("class", "axis "+classCssY)
+        .attr("class", "axis " + classCssY)
         .call(d3Axis.axisLeft(y));
       g.append("g")
-        .attr("class", "axis "+classCssX)
+        .attr("class", "axis " + classCssX)
         .attr("transform", "translate(0," + height + ")")
         .call(d3Axis.axisBottom(x).ticks(frecuency, "%"))
         .append("text")
@@ -463,7 +472,6 @@ export class HomePage {
     }
 
     //DRAW BARS
-    var dataSelection;
     if (orientation == "vertical") {
       g.selectAll(".bar")
         .data(data)
@@ -491,20 +499,17 @@ export class HomePage {
         .attr("y", (d) => y(d.label))
         .attr("width", (d) => width - x(d.value))
         .attr("height", y.bandwidth())
-        // .on("mouseover",  function(d,i){
-        // // console.log(this);
-        //   d3.select(this)
-        //     .style("fill", "aqua");
-        //        // Get current event info
-        //        this.barTypeRequest=chartText;
-        //  // console.log(d3.event);
-        //   this.onMouseover;
-        // })
-        // .on("mouseout",function(){
-        //   d3.select(this)
-        //   .style("fill", "black");
-        // });
-        .on('mouseover', this.onMouseover);;
+        .on("mouseover", function (d, i) {
+          d3.select(this)
+            .style("fill", "aqua");
+          // Get current event info
+          this.barTypeRequest = chartText;
+          this.onMouseover;
+        })
+        .on("mouseout", function () {
+          d3.select(this)
+            .style("fill", "black");
+        });
     }
 
   }
@@ -525,11 +530,11 @@ export class HomePage {
     color = d3Scale.scaleOrdinal()
       .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
     arc = d3Shape.arc()
-      .outerRadius(radius - 10)
+      .outerRadius(radius - marginTop)
       .innerRadius(0);
     labelArc = d3Shape.arc()
-      .outerRadius(radius - 40)
-      .innerRadius(radius - 40);
+      .outerRadius(radius - marginRight - 40)
+      .innerRadius(radius - marginLeft - 120);
     pie = d3Shape.pie()
       .sort(null)
       .value((d: any) => d.value);
@@ -541,7 +546,6 @@ export class HomePage {
       .append("g")
       .attr("transform", "translate(" + Math.min(width, height) / 2 + "," + Math.min(width, height) / 2 + ")");
 
-    console.log(data);
     g = svg.selectAll(".arc")
       .data(pie(data))
       .enter().append("g")
@@ -549,12 +553,9 @@ export class HomePage {
     g.append("path").attr("d", arc)
       .style("fill", (d: any) => color(d.data.value))
       .on("mouseover", function () {
-        console.log(this);
         d3.select(this)
           .style("fill", "aqua");
         // Get current event info
-        console.log(d3.event);
-        //this.onMouseover;
       })
       .on("mouseout", function () {
         d3.select(this)
@@ -562,6 +563,6 @@ export class HomePage {
       });
     g.append("text").attr("transform", (d: any) => "translate(" + labelArc.centroid(d) + ")")
       .attr("dy", ".35em")
-      .text((d: any) => d.data.value);
+      .text((d: any) => d.data.label + " " + d.data.value.toFixed(3) * 100 + "%");
   }
 }
