@@ -440,10 +440,10 @@ export class HomePage {
         .call(d3Axis.axisLeft(y).ticks(frecuency, "%"))
         .append("text")
         .attr("class", "axis-title")
-        .attr("transform", "rotate(-90)")
+        .attr("transform", "rotate(0)")
         .attr("y", 6)
         .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
+        .attr("text-anchor", "middle")
         .text(chartText);
     } else {
       g.append("g")
@@ -455,7 +455,7 @@ export class HomePage {
         .call(d3Axis.axisBottom(x).ticks(frecuency, "%"))
         .append("text")
         .attr("class", "axis-title")
-        .attr("transform", "rotate(0)")
+        .attr("transform", "rotate(90)")
         .attr("y", 6)
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
