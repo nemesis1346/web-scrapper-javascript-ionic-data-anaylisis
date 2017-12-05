@@ -50,6 +50,7 @@ export class HomePage {
   private listFolk: DataModel[];
   //Variables Profession
   private listResultProfession: ChartData[];
+  private listMember:DataModel[];
   private listMusician: DataModel[];
   private listDesigner: DataModel[];
   private listPhotographer: DataModel[];
@@ -114,6 +115,7 @@ export class HomePage {
       this.listFolk = [];
       //Profession
       this.listResultProfession = [];
+      this.listMember=[];
       this.listMusician = [];
       this.listDesigner = [];
       this.listPhotographer = [];
@@ -234,6 +236,9 @@ export class HomePage {
         this.listFolk.push(element);
       }
       //Get Data Profession
+      if(element.profession=="Member"){
+        this.listMember.push(element);
+      }
       if (element.profession == "Musician") {
         this.listMusician.push(element);
       }
@@ -307,10 +312,10 @@ export class HomePage {
 
     //Set Result Age
     this.listResultAgeGroup.push(
-      { label: "Age(18-26)", value: this.listAgeGroup1.length / DataGeneral.length },
-      { label: "Age(27-35)", value: this.listAgeGroup2.length / DataGeneral.length },
-      { label: "Age(36-42)", value: this.listAgeGroup3.length / DataGeneral.length },
-      { label: "Age(43-50+)", value: this.listAgeGroup4.length / DataGeneral.length });
+      { label: "(18-26)", value: this.listAgeGroup1.length / DataGeneral.length },
+      { label: "(27-35)", value: this.listAgeGroup2.length / DataGeneral.length },
+      { label: "(36-42)", value: this.listAgeGroup3.length / DataGeneral.length },
+      { label: "(43-50+)", value: this.listAgeGroup4.length / DataGeneral.length });
     console.log(this.listResultAgeGroup);
 
     //Set Result Music Genre
@@ -365,9 +370,9 @@ export class HomePage {
   //GRAPHS
   initializeGraphs() {
     this.initGenericPie("#barGenre", 900, 500, this.listResultGenre, 50, 20, 20, 30);
-    this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, this.listResultProfession, "MusicData", "horizontal", 10, 0.3,0.2);;
-    this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, this.listResultMusicGenre, "MusicData", "vertical", 10, 0.3,0.2);
-    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, this.listResultAgeGroup, "MusicData", "vertical", 10, 0.3,0.3);
+    this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, this.listResultProfession, "MusicData", "horizontal", 5, 0.3,"axis--x--profession","axis--y--profession");
+    this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, this.listResultMusicGenre, "MusicData", "vertical", 10, 0.3,"axis--x--musicGenre","axis--y--musicGenre");
+    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, this.listResultAgeGroup, "MusicData", "vertical", 10, 0.3,"axis--x--ageGroup","axis--y--ageGroup");
   }
 
   //GENERIC
@@ -380,7 +385,7 @@ export class HomePage {
     marginBottom: number,
     data: ChartData[],
     chartText: string, orientation: string,
-    frecuency: number, padding: number,maxRange:number) {
+    frecuency: number, padding: number,classCssX:string,classCssY:string) {
     //VARIABLES
     var width, height, g, svg, x, y;
 
@@ -410,22 +415,22 @@ export class HomePage {
       x = d3Scale.scaleBand().rangeRound([0, width]).padding(padding);
       y = d3Scale.scaleLinear().rangeRound([height, 0]);
       x.domain(data.map((d) => d.label));
-      y.domain([0, maxRange]);
+      y.domain([0, d3Array.max(data, (d) => d.value)+0.01]);
     } else {
       y = d3Scale.scaleBand().rangeRound([0, height]).padding(padding);
       x = d3Scale.scaleLinear().rangeRound([0, width]);
       y.domain(data.map((d) => d.label));
-      x.domain([maxRange, 0]);
+      x.domain([d3Array.max(data, (d) => d.value)+0.01, 0]);
     }
 
     //DRAW AXIS
     if (orientation == "vertical") {
       g.append("g")
-        .attr("class", "axis axis--x")
+        .attr("class", "axis "+classCssX)
         .attr("transform", "translate(0," + height + ")")
         .call(d3Axis.axisBottom(x));
       g.append("g")
-        .attr("class", "axis axis--y")
+        .attr("class", "axis "+classCssY)
         .call(d3Axis.axisLeft(y).ticks(frecuency, "%"))
         .append("text")
         .attr("class", "axis-title")
@@ -436,10 +441,10 @@ export class HomePage {
         .text(chartText);
     } else {
       g.append("g")
-        .attr("class", "axis axis--y")
+        .attr("class", "axis "+classCssY)
         .call(d3Axis.axisLeft(y));
       g.append("g")
-        .attr("class", "axis axis--x")
+        .attr("class", "axis "+classCssX)
         .attr("transform", "translate(0," + height + ")")
         .call(d3Axis.axisBottom(x).ticks(frecuency, "%"))
         .append("text")
@@ -448,7 +453,7 @@ export class HomePage {
         .attr("y", 6)
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
-        .text(chartText)
+        .text(chartText);
     }
 
     //DRAW BARS
