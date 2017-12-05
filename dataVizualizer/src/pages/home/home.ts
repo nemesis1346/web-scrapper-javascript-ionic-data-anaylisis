@@ -23,7 +23,8 @@ export class HomePage {
   private listFilteredLocation:DataModel[];
   //Variables Genre
   private listResultGenre: ChartData[];
-  private listGenre: DataModel[];
+  private listGenreMale: DataModel[];
+  private listGenreFemale: DataModel[];  
   //Variables Age  
   private listResultAgeGroup: ChartData[];
   private listAgeGroup1: DataModel[];
@@ -87,7 +88,8 @@ export class HomePage {
       this.listFilteredLocation=[];
       //Genre
       this.listResultGenre = [];
-      this.listGenre = [];
+      this.listGenreMale = [];
+      this.listGenreFemale = [];
       this.barTypeRequest = "";
       //Age
       this.listAgeGroup1 = [];
@@ -171,7 +173,11 @@ export class HomePage {
     this.listFilteredLocation.forEach(element => {
       //Get Data Genre
       if (element.genre == "male") {
-        this.listGenre.push(element);
+        this.listGenreMale.push(element);
+      }
+      if(element.genre=="female"){
+        this.listGenreFemale.push(element);
+        
       }
       //Get Data AgeGroup
       if (element.age == "group1") {
@@ -305,61 +311,61 @@ export class HomePage {
     });
     //Set Result Genre
     this.listResultGenre.push({
-      label: "male", value: this.listGenre.length / DataGeneral.length
+      label: "male", value: this.listGenreMale.length / this.listFilteredLocation.length
     },
-      { label: "female", value: 1 - this.listGenre.length / DataGeneral.length });
+      { label: "female", value: this.listGenreFemale.length / this.listFilteredLocation.length });
     console.log(this.listResultGenre);
 
     //Set Result Age
     this.listResultAgeGroup.push(
-      { label: "(18-26)", value: this.listAgeGroup1.length / DataGeneral.length },
-      { label: "(27-35)", value: this.listAgeGroup2.length / DataGeneral.length },
-      { label: "(36-42)", value: this.listAgeGroup3.length / DataGeneral.length },
-      { label: "(43-50+)", value: this.listAgeGroup4.length / DataGeneral.length });
+      { label: "(18-26)", value: this.listAgeGroup1.length / this.listFilteredLocation.length },
+      { label: "(27-35)", value: this.listAgeGroup2.length / this.listFilteredLocation.length },
+      { label: "(36-42)", value: this.listAgeGroup3.length / this.listFilteredLocation.length },
+      { label: "(43-50+)", value: this.listAgeGroup4.length / this.listFilteredLocation.length });
     console.log(this.listResultAgeGroup);
 
     //Set Result Music Genre
     this.listResultMusicGenre.push(
-      { label: "AllGenres", value: this.listAllGenres.length / DataGeneral.length },
-      { label: "Pop", value: this.listPop.length / DataGeneral.length },
-      { label: "Rap&HipHop", value: this.listRap.length / DataGeneral.length },
-      { label: "Rock", value: this.listRock.length / DataGeneral.length },
-      { label: "Country", value: this.listCountry.length / DataGeneral.length },
-      { label: "Latin", value: this.listLatin.length / DataGeneral.length },
-      { label: "R&B", value: this.listRB.length / DataGeneral.length },
-      { label: "Electronic", value: this.listElectronic.length / DataGeneral.length },
-      { label: "Alternative", value: this.listAlternative.length / DataGeneral.length },
-      { label: "Metal", value: this.listMetal.length / DataGeneral.length },
-      { label: "Reggae", value: this.listReggae.length / DataGeneral.length },
-      { label: "Blues", value: this.listBlues.length / DataGeneral.length },
-      { label: "Religious", value: this.listReligious.length / DataGeneral.length },
-      { label: "Jazz", value: this.listJazz.length / DataGeneral.length },
-      { label: "Classical", value: this.listClassical.length / DataGeneral.length },
-      { label: "Folk", value: this.listFolk.length / DataGeneral.length });
+      { label: "AllGenres", value: this.listAllGenres.length / this.listFilteredLocation.length },
+      { label: "Pop", value: this.listPop.length / this.listFilteredLocation.length },
+      { label: "Rap&HipHop", value: this.listRap.length / this.listFilteredLocation.length },
+      { label: "Rock", value: this.listRock.length / this.listFilteredLocation.length },
+      { label: "Country", value: this.listCountry.length / this.listFilteredLocation.length },
+      { label: "Latin", value: this.listLatin.length / this.listFilteredLocation.length },
+      { label: "R&B", value: this.listRB.length / this.listFilteredLocation.length },
+      { label: "Electronic", value: this.listElectronic.length / this.listFilteredLocation.length },
+      { label: "Alternative", value: this.listAlternative.length / this.listFilteredLocation.length },
+      { label: "Metal", value: this.listMetal.length / this.listFilteredLocation.length },
+      { label: "Reggae", value: this.listReggae.length / this.listFilteredLocation.length },
+      { label: "Blues", value: this.listBlues.length / this.listFilteredLocation.length },
+      { label: "Religious", value: this.listReligious.length / this.listFilteredLocation.length },
+      { label: "Jazz", value: this.listJazz.length / this.listFilteredLocation.length },
+      { label: "Classical", value: this.listClassical.length / this.listFilteredLocation.length },
+      { label: "Folk", value: this.listFolk.length / this.listFilteredLocation.length });
     console.log(this.listResultMusicGenre);
     //Set Profession
     this.listResultProfession.push(
-      { label: "Musician", value: this.listMusician.length / DataGeneral.length },
-      { label: "Designer", value: this.listDesigner.length / DataGeneral.length },
-      { label: "Photographer", value: this.listPhotographer.length / DataGeneral.length },
-      { label: "Artist", value: this.listArtist.length / DataGeneral.length },
-      { label: "Producer", value: this.listProducer.length / DataGeneral.length },
-      { label: "Blogger", value: this.listBlogger.length / DataGeneral.length },
-      { label: "Filmmaker", value: this.listFilmmaker.length / DataGeneral.length },
-      { label: "Writer", value: this.listWriter.length / DataGeneral.length },
-      { label: "Comedian", value: this.listComedian.length / DataGeneral.length },
-      { label: "Actor", value: this.listActor.length / DataGeneral.length },
-      { label: "Model", value: this.listModel.length / DataGeneral.length },
-      { label: "Promoter", value: this.listPromoter.length / DataGeneral.length },
-      { label: "Venue", value: this.listVenue.length / DataGeneral.length },
-      { label: "Brand", value: this.listBrand.length / DataGeneral.length },
-      { label: "Developer", value: this.listDeveloper.length / DataGeneral.length },
-      { label: "Entrepreneur", value: this.listEntrepreneur.length / DataGeneral.length },
-      { label: "Curator", value: this.listCurator.length / DataGeneral.length },
-      { label: "Dancer", value: this.listDancer.length / DataGeneral.length },
-      { label: "Athlete", value: this.listAthlete.length / DataGeneral.length },
-      { label: "Activist", value: this.listActivist.length / DataGeneral.length },
-      { label: "Entertainer", value: this.listEntertainer.length / DataGeneral.length });
+      { label: "Musician", value: this.listMusician.length / this.listFilteredLocation.length },
+      { label: "Designer", value: this.listDesigner.length / this.listFilteredLocation.length },
+      { label: "Photographer", value: this.listPhotographer.length / this.listFilteredLocation.length },
+      { label: "Artist", value: this.listArtist.length / this.listFilteredLocation.length },
+      { label: "Producer", value: this.listProducer.length / this.listFilteredLocation.length },
+      { label: "Blogger", value: this.listBlogger.length / this.listFilteredLocation.length },
+      { label: "Filmmaker", value: this.listFilmmaker.length / this.listFilteredLocation.length },
+      { label: "Writer", value: this.listWriter.length / this.listFilteredLocation.length },
+      { label: "Comedian", value: this.listComedian.length / this.listFilteredLocation.length },
+      { label: "Actor", value: this.listActor.length / this.listFilteredLocation.length },
+      { label: "Model", value: this.listModel.length / this.listFilteredLocation.length },
+      { label: "Promoter", value: this.listPromoter.length / this.listFilteredLocation.length },
+      { label: "Venue", value: this.listVenue.length / this.listFilteredLocation.length },
+      { label: "Brand", value: this.listBrand.length / this.listFilteredLocation.length },
+      { label: "Developer", value: this.listDeveloper.length / this.listFilteredLocation.length },
+      { label: "Entrepreneur", value: this.listEntrepreneur.length / this.listFilteredLocation.length },
+      { label: "Curator", value: this.listCurator.length / this.listFilteredLocation.length },
+      { label: "Dancer", value: this.listDancer.length / this.listFilteredLocation.length },
+      { label: "Athlete", value: this.listAthlete.length / this.listFilteredLocation.length },
+      { label: "Activist", value: this.listActivist.length / this.listFilteredLocation.length },
+      { label: "Entertainer", value: this.listEntertainer.length / this.listFilteredLocation.length });
     console.log(this.listResultProfession);
   }
 
@@ -370,9 +376,9 @@ export class HomePage {
   //GRAPHS
   initializeGraphs() {
     this.initGenericPie("#barGenre", 900, 500, this.listResultGenre, 50, 20, 20, 30);
-    this.initGeneric("bar", "#barProfession", 600, 800, 70, 20, 20, 30, this.listResultProfession, "MusicData", "horizontal", 5, 0.3,"axis--x--profession","axis--y--profession");
-    this.initGeneric("bar", "#barMusicGenre", 900, 500, 40, 20, 40, 40, this.listResultMusicGenre, "MusicData", "vertical", 10, 0.3,"axis--x--musicGenre","axis--y--musicGenre");
-    this.initGeneric("bar", "#barAgeGroup", 900, 500, 40, 20, 40, 40, this.listResultAgeGroup, "MusicData", "vertical", 10, 0.3,"axis--x--ageGroup","axis--y--ageGroup");
+    this.initGeneric("bar", "#barProfession", 600, 800, 100, 20, 20, 30, this.listResultProfession, "MusicData", "horizontal", 5, 0.3,"axis--x--profession","axis--y--profession");
+    this.initGeneric("bar", "#barMusicGenre", 900, 500, 60, 20, 40, 40, this.listResultMusicGenre, "MusicData", "vertical", 10, 0.3,"axis--x--musicGenre","axis--y--musicGenre");
+    this.initGeneric("bar", "#barAgeGroup", 900, 500, 60, 20, 40, 40, this.listResultAgeGroup, "MusicData", "vertical", 10, 0.3,"axis--x--ageGroup","axis--y--ageGroup");
   }
 
   //GENERIC
