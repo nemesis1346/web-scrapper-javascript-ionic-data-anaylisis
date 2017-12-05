@@ -5,7 +5,6 @@ import * as d3Scale from "d3-scale";
 import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
-import d3tip from 'd3tip';
 import { DataSourceProvider } from "../../providers/data-source/data-source";
 import { DataGeneral, DataModel } from "../../data/data"
 export interface ChartData {
