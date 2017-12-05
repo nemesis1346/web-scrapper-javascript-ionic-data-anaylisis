@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ApiProvider {
 
-  private url: string ='http://jobstc.usask.ca'
+  private url: string ='http://10.81.4.40:8080'
 
   constructor(public http: HttpClient) {
   }
