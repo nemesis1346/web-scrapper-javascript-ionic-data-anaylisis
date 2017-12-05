@@ -6,6 +6,7 @@ import * as d3Array from "d3-array";
 import * as d3Axis from "d3-axis";
 import * as d3Shape from "d3-shape";
 import { DataSourceProvider } from "../../providers/data-source/data-source";
+import {DataGeneral,DataModel} from "../../data/data"
 export interface ChartData {
   label: string,
   value: number
@@ -63,16 +64,20 @@ export const MusicGenre: ChartData[] = [
   templateUrl: 'home.html'
 })
 export class HomePage {
-  private listData: ChartData[];
+  private listResultGenre: ChartData[];
   private city: any;
   private param: any;
   private barTypeRequest:any;
+  private listAgeGroup:DataModel[];
+  private listGenre:DataModel[];
   constructor(public navCtrl: NavController,
     public menuCtrl: MenuController,
     public alertController: AlertController,
     public dataSourceProvider: DataSourceProvider) {
-    this.listData = [];
+    this.listResultGenre = [];
     this.barTypeRequest="";
+    this.listAgeGroup=[];
+    this.listGenre=[];
     }
 
   ionViewDidLoad() {
@@ -81,7 +86,7 @@ export class HomePage {
 
   onSelectCity(city) {
     if (city && city != "") {
-
+      this.requestDataByCity(city);
     } else {
 
     }
@@ -104,21 +109,23 @@ export class HomePage {
     console.log(this.barTypeRequest);
     console.log(d);
     console.log(i);
-    
     //this.requestDataByParam(this.city,);
   }
   requestDataByCity(city:string){
+    //Genre
+    DataGeneral.forEach(element => {
+      if(element.genre=="male"){
+        this.listGenre.push(element);
+        console.log(this.listGenre.length);
+      }else{
 
+      }
+
+    });
   }
 
   requestDataByParam(city: string, parameter: string) {
-    this.dataSourceProvider.getData(city, parameter).subscribe((resp) => {
-      //convert each response in list
-      //this.listData
-      this.initializeGraphs();
-    }, (err) => {
-      console.log("Error");
-    });
+    
   }
 
   //GRAPHS
