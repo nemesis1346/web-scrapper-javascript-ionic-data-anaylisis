@@ -1,0 +1,114 @@
+[
+  {
+    "type": "All Genres",
+    "Frequency": 334,
+    "Percent": 14.3,
+    "Valid Percent": 14.3,
+    "CumulativePercent": 14.3
+  },
+  {
+    "type": "Alternative/Indie Rock",
+    "Frequency": 376,
+    "Percent": 16.1,
+    "Valid Percent": 16.1,
+    "CumulativePercent": 30.4
+  },
+  {
+    "type": "Classical",
+    "Frequency": 8,
+    "Percent": 0.3,
+    "Valid Percent": 0.3,
+    "CumulativePercent": 30.8
+  },
+  {
+    "type": "Country",
+    "Frequency": 48,
+    "Percent": 2.1,
+    "Valid Percent": 2.1,
+    "CumulativePercent": 32.8
+  },
+  {
+    "type": "Electronic",
+    "Frequency": 232,
+    "Percent": 9.9,
+    "Valid Percent": 9.9,
+    "CumulativePercent": 42.8
+  },
+  {
+    "type": "Folk",
+    "Frequency": 20,
+    "Percent": 0.9,
+    "Valid Percent": 0.9,
+    "CumulativePercent": 43.6
+  },
+  {
+    "type": "Jazz",
+    "Frequency": 28,
+    "Percent": 1.2,
+    "Valid Percent": 1.2,
+    "CumulativePercent": 44.8
+  },
+  {
+    "type": "Latin",
+    "Frequency": 24,
+    "Percent": 1,
+    "Valid Percent": 1,
+    "CumulativePercent": 45.8
+  },
+  {
+    "type": "Metal",
+    "Frequency": 108,
+    "Percent": 4.6,
+    "Valid Percent": 4.6,
+    "CumulativePercent": 50.5
+  },
+  {
+    "type": "Pop",
+    "Frequency": 312,
+    "Percent": 13.4,
+    "Valid Percent": 13.4,
+    "CumulativePercent": 63.8
+  },
+  {
+    "type": "R&B",
+    "Frequency": 200,
+    "Percent": 8.6,
+    "Valid Percent": 8.6,
+    "CumulativePercent": 72.4
+  },
+  {
+    "type": "Rap & Hip-Hop",
+    "Frequency": 220,
+    "Percent": 9.4,
+    "Valid Percent": 9.4,
+    "CumulativePercent": 81.8
+  },
+  {
+    "type": "Reggae",
+    "Frequency": 44,
+    "Percent": 1.9,
+    "Valid Percent": 1.9,
+    "CumulativePercent": 83.7
+  },
+  {
+    "type": "Religious",
+    "Frequency": 40,
+    "Percent": 1.7,
+    "Valid Percent": 1.7,
+    "CumulativePercent": 85.4
+  },
+  {
+    "type": "Rock",
+    "Frequency": 340,
+    "Percent": 14.6,
+    "Valid Percent": 14.6,
+    "CumulativePercent": 100
+  },
+  {
+    "type": "Total",
+    "Frequency": 2334,
+    "Percent": 100,
+    "Valid Percent": 100,
+    "CumulativePercent": ""
+  }
+]
