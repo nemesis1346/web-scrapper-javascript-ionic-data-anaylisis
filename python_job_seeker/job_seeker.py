@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import schedule
+import time
 
 tags="blockchain"
 limit="200"
@@ -46,5 +48,14 @@ def get_web3_jobs():
     except requests.exceptions.RequestException as e:
         print(f"Error fetching jobs: {e}")
 
-# Call the function
-get_web3_jobs()
+
+def run_script():
+    # place your function call here
+    # Call the function
+    get_web3_jobs()
+
+schedule.every(1).minutes.do(run_script)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
