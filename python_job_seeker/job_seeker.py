@@ -92,5 +92,4 @@ def get_web3_jobs():
 get_web3_jobs()
 
 
-#TODO: fetch more tags like web3, check in web3 jobs
 #TODO: processing crew ai with job description
