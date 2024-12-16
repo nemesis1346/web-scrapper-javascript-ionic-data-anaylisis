@@ -3,19 +3,41 @@ from bs4 import BeautifulSoup
 import schedule
 import time
 from datetime import datetime, timedelta
+from crewai import Agent, Task, Process, Crew
+import os 
+from dotenv import load_dotenv
+
+load_dotenv()
+api = os.environ.get('OPENAI_API_KEY')
 
 limit="200"
 token="KWK9A42R5jgteRpxZo7EbdrZAFrNPj2R"
-tag_list = ['blockchain', "web3","backend","crypto","dao","defi",
-            "entry level","evm","erc 20","front end","full stack",
-            "game dev","ganache","golang","hardhat","java","javascript"
-            ,"layer 2","mobile","nft","node","open source","openzeppelin",
-            "pay in crypto","react","refi","research","rust","smart contract",
-            "solidity","truffle","web3 py","web3js","zero knowledge"]
+# tag_list = ['blockchain', "web3","backend","crypto","dao","defi",
+#             "entry level","evm","erc 20","front end","full stack",
+#             "game dev","ganache","golang","hardhat","java","javascript"
+#             ,"layer 2","mobile","nft","node","open source","openzeppelin",
+#             "pay in crypto","react","refi","research","rust","smart contract",
+#             "solidity","truffle","web3 py","web3js","zero knowledge"]
 
-# tag_list = ['blockchain', "web3","backend","crypto"]
+tag_list = ['blockchain']
 
 job_results_list=[]
+
+agent1=Agent(
+    role = "Software developer job recruiter",
+    goal = "Give me a percentage of match of a given job description according with my resume given. When you do the analysis consider that I only want the remote jobs",
+    backstory = """you are job recruiter so you are going to match my cv with the job description 
+    I am going to give you. Please just match the skills that I actually do have and give me the percentage of match. 
+    Also make your judgement accordingly""",
+    verbose = True
+)   
+
+def process_description(job_description):
+        print("\nJob desc: "+str(job_description))
+        # process description
+        raw_description = job_description["description"]
+        soup_description = BeautifulSoup(raw_description,"html.parser")
+        return soup_description.get_text()
 
 def print_job(job_results_list):
     for job in job_results_list:
@@ -31,13 +53,40 @@ def print_job(job_results_list):
         print()
         # print(job["tags"])  # Array
 
-        # process description
-        raw_description = job["description"]
-        soup_description = BeautifulSoup(raw_description,"html.parser")
-        description_text = soup_description.get_text()
+       
         # print("job description: "+description_text)
 
     print("Total number of jobs: "+str(len(job_results_list)))
+
+def analyse_job_with_ai(job_results_list):
+        for job in job_results_list:
+
+            print('current job: '+str(job_results_list))
+
+            task1 = Task(
+                description = """
+                Analyse the following job description:
+                """+ process_description(job) +"""
+                """,
+                expected_output = """
+                 Match my cv with the job description 
+                I am going to give you. Please just match the skills that I actually do have and give me the percentage of match. 
+                Also make your judgement accordingly
+                """,
+                agent = agent1
+            )
+
+            crew =Crew(
+                agents= [agent1],
+                tasks = [task1],
+                process=Process.sequential,
+                verbose=True
+            )
+
+            result = crew.kickoff()
+            print(result)
+
+
 
 def get_web3_jobs():
 
@@ -74,7 +123,9 @@ def get_web3_jobs():
         except requests.exceptions.RequestException as e:
             print(f"Error fetching jobs: {e}")
 
-    print_job(job_results_list)
+    # print_job(job_results_list[0])
+    analyse_job_with_ai(job_results_list)
+
             # TODO: Add your code to save the job to your db
             # Make sure the job is not duplicated before saving
 
