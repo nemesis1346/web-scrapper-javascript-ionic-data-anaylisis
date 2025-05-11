@@ -77,18 +77,18 @@ def analyse_job_with_ai(job_results_list):
             job_description  =process_description(job)
 
             task1 = Task(
-                description = """Analyze this job description against the candidate's CV:
+                description = f"""Analyze this job description against the candidate's CV:
                    
                    **Job Description**:\n{job_description}
                    
-                   **CV**: <loaded from file>
+                   **CV**: THis is a test<< THIS IS THE PROBLEM
                    
                    Evaluate:
                    1. Skills match (highlight exact matches)
                    2. Experience alignment
                    3. Missing requirements""",
                 agent = agent1,
-                context=[cv_text],
+                # context=[cv_text],
                 expected_output="Detailed match report with strengths/gaps"
             )
 
