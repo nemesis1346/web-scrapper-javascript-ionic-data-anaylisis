@@ -1,0 +1,169 @@
+Versatile Computer Scientist and Software Developer with over 8 years of experience spanning blockchain technology, cloud computing, full-stack development, and software architecture. Experienced in working across industries, from AdTech and cloud-based DevOps to FinTech and Transportation Industries. I am passionate about decentralized technologies, software design best practices, and overall systems architecture.
+
+__________________________________________________________________________________________________
+EDUCATION:
+Master of Computer Science, University of Saskatchewan, Saskatoon, SK, Canada, September 2019                                                            Thesis: Digital asset distribution algorithms in decentralized systems using Ethereum and Hyperledger Fabric Blockchain integration.
+Electrical Engineering Bachelor's Degree, San Francisco de Quito University, Quito, Ecuador, September 2015 Thesis: Electric Guitar Digital Chorus Effect with Raspberry Pi. Developed a python-based real-time audio processing project based on signal processing equations. 
+Oregon State University Exchange Program, Corvallis, Oregon, USA, September 2013
+
+Conferences: Stewart, J., T. Chavez, M. Maigua, & A. Tu. Documenting and Archiving Media Lengua: A rare mixed language spoken in the Ecuadorian Highlands. 6th International Conference on Language Documentation & Conservation (ICLDC), Connecting Communities, Languages & Technology. Hawai’i Imin International Conference Center. Honolulu, Hawai’i, USA. February 28-March 3, 2019
+
+___________________________________________________________________________________________________
+PROFESSIONAL EXPERIENCE 
+
+Full Stack - Blockchain Developer
+ChainMyne. Laval, Quebec, Canada					                                           November 2024 - Present
+	Contributed to design, maintain and support infrastructure of crypto asset purchase platform. Designed architecture of web platform, mobile application and management system of cryptocurrencies. Led software developer team to adjust the requirements of the business with the best practices for the source code.
+
+Responsibilities:
+Tech Lead and System Architect onChain and offChain to trace blockchain transactions
+Implementation of AWS Nitro Enclaves for AWS Nitro API-Cosigner for Fireblocks managing Customer Managed keys(CMK) through the AWS Key Management Service(KMS)
+Fireblocks Rest API with webhooks to listen to blockchain events
+Telegram REST API in python with Quicknote to integrate Solana and Ethereum in a trading chatbot
+Fetched crypto assets data into a server with CoinGeckoAPI and Kraken API. 
+Designed architecture of non-holder crypto purchase platform in mobile(Android and Iphone) and web using AngularJS wrapped by Expo and Turbo.
+Developed and maintained python Fast APIs deployed across multiple servers within the company’s infrastructure.
+Maintenance MongoDB Schema and SQL databases in AWS instances. 
+Automated system maintenance using Python scripts and cron jobs(bree) for updating the company's databases.
+Debugged front end AngularJS application issues before deployment with unit testing
+Engineered devops pipelines with ExpoApp for native package deployment.
+Deployed Docker container infrastructure to software production in the company's servers.
+
+Technology: Python, RestAPI, Angular.js, React Native, Next.js, Expo Mobile, Turbo, docker, Fireblocks API, Coingecko API, Aquanow API,  Kraken API, Fast API, poetry py, ShellScript, Automation, Bash Scripting, AWS, Tamagui, Solito, Breem Auth0, Android SDK
+
+Blockchain Developer
+Remote Consulting                   					                                        April 2024 - November 2024
+
+Arbitrage Bot Project: Developed an algorithm for detecting changes in DEXs liquidity pools in token pairs in Solana Blockchain using the following integration APIs: Orca SDK, Meteora API, Raydium API. The algorithm fetched data from these DEXs and calculated the swap fees between two different liquidity pools for possible profit opportunities. Tested with Hardhat framework.
+DAO Scrypt Platform for voting: Designed and Implemented architecture for DAO application for voting through crypto BSV with Handcash wallet. The application used scrypt to interact with the smart contracts to store the votes of statements with 60% or more votes to reach consensus. Once consensus was reached, the participants were rewarded with BSV depending on the level of participation. The Dapp had React in the front-end and Node.js in the back-end. 
+MemeCoin Platform Project: Maintained an already deployed platform to buy, sell and swap a specific memecoin ERC20 token-based. Fixed bugs related with the integration of metamask wallet and Chakra-UI components. Added new endpoints in a nodejs server using axios that fetched data from Metamask and interacted through ethers.js. Tested and deployed new smart contracts that interacted with ERC20 tokens in testnets such as Sepolia-Infura and Gitcoin fake Ether. 
+Open Sea NFT project: Integrated React App that was already minting NFTs ERC721 in OpenSea with IPFS Piñata Framework to be able to have their own references for their digital assets. Therefore we developed an inside platform that fetched the NFTs created through the App and also accessible in OpenSea with more information and features for selling and buying these assets created in the platform. Managed MongoDB local database that fetched info from the blockchain with a cron job. Tested with truffle in Ropstein-Infura. Local testing in Ganache-cli
+Decentralized Social Media project: Maintained and fixed bugs of a ERC20 based platform that was minting usernames so they can interact with other users through posts and comments, executing microtransactions with each action. Implemented features of Alchemy SDK for testing networks such as Sepolia, and front-end components for metamask integration. Tested Open Zeppelin protocols with the creation of new smart contracts that will interact with the ones already deployed to detect security breaches. Therefore auditing solidity smart contracts.  
+Real Estate NFT project: Developed a simple ERC721 smart contract to distribute the NFT of a real estate property between different owners, therefore also distributing the rent by the percentage of ownership. Integrated through web3.js the backend endpoints with the smart contract ABI methods. Audited and deployed the solidity smart contracts and tested it in the Ropstein-Infura network. 
+TRON ERC20 token auditing: Audited with reports of the possible vulnerabilities of a smart contract forked from ERC20 TRON token which had some additional methods. Used Open Zeppelin protocols to have a reference over the possible vulnerabilities. Developed other smart contracts that would interact with the first ones to ensure they cannot break the system. 
+
+Technology: Solidity, Rust, Typescript, Javascript, Scrypt, React, MongoDB, Ethereum, Truffle, Solana, ERC20, ERC721, OpenZeppelin, Ganache, NFTs, OpenSea, Etherscan, Orca, Meteora, Raydium, DEXs, Ropstein, Sepolia, Infura, Web3.js, Ethers.js, Node.js, Handcash
+
+Back End Developer
+Global Eagle - Anuvu. Montreal, Canada (Anuvu.com)				                                           April 2021 - April 2024
+	Contributed to design, maintain and support infrastructure of data streaming content for screens in the passenger seats and cellphone apps for different airline companies. Refactoring and maintenance of legacy python backend code in UNIX based server simulators before the deployment of the software in the aircrafts. 
+
+Responsibilities:
+Integrated and designed Redis Database and implemented redis-py in UNIX based server.
+Developed and maintained python APIs deployed across multiple servers within the company’s infrastructure.
+Refactored and maintained python legacy bank-end code in order to accommodate redis database and memcache at the same time. The infrastructure needed to serve both databases according to each client. 
+Maintenance of different databases such as AlchemySQL, SQLite, and MySQL in different servers on ground that transmitted data to the APIs in the aircrafts. 
+Automated system maintenance using Python scripts and cron jobs for updating the company's databases.
+Debugged front end AngularJS applications issues coming from APIs responses according to the business logic.
+Leveraged AWS S3 via Python’s Boto3 for client heavy data management.
+Engineered CI/CD pipelines with Jenkins for Python package deployments.
+Used and Deployed Docker container infrastructure to software production in different environments.
+Diagnosed server logs and addressed performance issues with grafana diagrams. 
+Memcached and Whoosh design, maintenance for data search engines.
+UNIX based commands to deploy development, staging and production python packages in different servers of the company.
+Shell scripting and data exchange of different servers with ssh remote connections, 
+UI aircraft simulation with vnc connections and usb dongle with postman local calls. 
+
+Technology: Python, redis-pi, AlchemySQL, SQLite, MySQL, RestAPI, ShellScript, Automation, Bash Scripting, AWS S3, botoS3, Angular.js, docker, memcache, whoosh, postman, ssh, grafana, devops
+
+Full Stack Developer
+DistrictM (Deloitte Technology Fast 15 award, Rank #4). Montreal, Canada    	                                                 August 2020 - March 2021
+Contributed to the development of an Advertising Exchange platform between  publishers and advertisement creators both front-end and back-end. The dashboard of the platform included diagrams, graphs, tables, and overall data analysis of the performance of the ads for the clients to check. Direct competitors of Google Ads. 
+
+Responsibilities:
+Developed, maintained and refactored React app with React Hooks, Redux, React Native and  best practices for the Front End.
+Designed best practices for front-end components for having more control over the graphs. Implemented  in-house CSS class libraries instead of using third party CSS frameworks such as bootstrap. 
+Implemented Test Driven Development on Back End using pytest - Python Coverage achieving 90% of code coverage.
+Developed Serverless Application Model  (SAM) on AWS services using lambda functions for storing and handling data in the AWS Cloud.
+Implemented AWS S3 Storage, Athena SQL Queries, Lambda Functions and Boto3 as RestAPI for the interaction with Front-End
+Followed Integration-Development, Staging, and Production environments handled with Drone builts. 
+Mastered Beeswax AdTech API for ad exchanges data. 
+
+Technology: React, Redux, React Native, CSS, Python, pytest, Lambda functions, AWS Athena, AWS S3, Athena Queries, Boto S3, RestAPI, Drone, Beeswax API, 
+
+Software Architect Remote Developer - DevOps Remote Developer
+NobleProg IT Training Services. Xiangzhou, China (https://www.nobleprog.com/)                               November 2019 - August  2020
+Contributed to the Integration of Open Source projects into Company’s education products. Developed and maintained UNIX based lxc and kvm instances for giving education tools to the students in the company's platform.
+
+Responsibilities:
+Designed and implemented Speech recognition AI back-end Node.js app with Speech To Text API from Google Cloud  and integrated it in an AngularJS company’s platform to record the voices of the students and transcribe it in the chat of the platform. 
+Hacked some features of large open-source projects adding LDAP, CAS authorization, and authentication of the company saving development time instead of recreating all these infrastructures from scratch
+Modified open source Ruby on Rails CMS(Content Management System) to integrate it with the company's platform and add LDAP authentication for its students transforming the open source project into an enterprise product saving weeks of software development to the company. The project used AWS S3 for storing slides for student presentations. 
+Maintained unix based lxc, kvm architecture such as apache configuration files for serving some company’s apps. 
+Synchronization of AWS cloud servers, replication, and backing up SQL based databases for  future migrations.
+Followed Continuous integration CI/CD with gitlab-ci.yml for large stages of production.
+
+
+Technology: Ruby on Rails, Javascript, Nodejs, Google Cloud Speech Recognition AI, LDAP, CAS, SQL, AWS S3, AWS database replication, lxc, kvm, ubuntu, apache, RestAPI
+
+
+
+
+Full Stack Developer - Lead Software Architect 
+Instawalkin Inc. Saskatoon BC, Canada  - Remote		                                                               July 2019 - October 2019
+	Contributed as one of the first employers of this startup to the design and implementation of the back-end and front-end of a massage booking appointment platform for the Saskatoon, Canada area.
+
+Responsibilities:
+Developed the strategy for the implementation of the business logic of the entire system: backend-frontend-middleware-cloud services-servers. 
+Implemented the solutions with Laravel PHP frameworks, React front end best practices (Redux), and Cloud Services(Google Cloud) with software architecture best practices modeling (MVP) and OAuth for Server-Mobile communication.
+Assessed the necessities of the company in software solutions in all the levels of the product: development, testing units, deployment, support to the clients. 
+Managed TIMEKIT API for scheduling system and STRIPE API for online payments according to the industry.
+Technology: React, Redux, PHP, LAravel, Google Cloud Services, OAuth, Timekit API, stripe API. 
+
+University of Saskatchewan, Saskatoon,SK,Canada                                                     September 2017 - September 2019
+Lead Software Developer in the Linguistics Department - Teacher Assistant in Computer Science for hours - Front End Lead Software Developer for the Tribal Council of First Nations         
+
+Responsibilities:   	                                   
+Managed classmates for different development tasks trying to identify the project feature priorities. The project was designed to offer a database of available jobs for local citizens using Ionic as front-end and Golang as backend. The project was developed for the Tribal Council of First Nations  
+Designed the architecture for a project called “Media Lengua” for the Linguistics Department using Firebase, Firestore and React to connect the backend systems with the user. 
+Lectured in Web Development Topics. CMPT 350
+Marked course’s assignments online at the University of Saskatchewan. Assignments included Linux commands, Java Concepts, and Algorithms.
+Research Intern with MITACS accelerator program - Membran Labs
+Membran Labs. Victoria BC, Canada (http://www.membran.net/labs/)                                      March 2018 - December 2018
+	Developed a  transaction system to distribute payments of digital assets using Hyperledger Fabric Blockchain with Hyperledger Composer as the main API. Presented a research report to MITACS innovation institute, Membran Labs, and the University of Saskatchewan. Developed an interface using Ionic(Angular.js) for the backend solution. 
+
+Technology: Ionic, Golang, Firebase, Firestore, React, Hyperledger Fabric, Ethereum.
+
+Bayteq CIA, Quito, Pichincha, Ecuador (http://www.bayteq.com/)		                                           January 2016 - July 2017     
+Back End Developer - Software Architect - Software Developer Junior
+Contributed, Designed and Implemented android development solutions using android development SDK tools for mobile development for different sorts of clients of the company, from banking to retail, to pharmaceuticals. 
+
+Responsibilities:
+Implemented Android SDK Material Design Principles for developing minimalistic app designs.
+Developed new features for banking app authentication mobile page, which after the authentication took the user to a browser app fetched in an android page, meaning that the bank controlled the app after the authentication. 
+Maintained and developed new features of a knockout.js front-end app for the client Fybeca, a pharmaceutical company. The app fetched data from remote urls to access the RestAPIs of the client. 
+Developed a new banking prototype app in android for serving different features to the potential banking clients.
+Developed new features of a big system of data replication through different Java-SQL-Enterprise databases in different RestAPIs with the main client PRONACA, Ecuadorian Company. 
+Mentored other developers in a team to pass some of the projects that I was assigned to before leaving the company for other opportunities. 
+Technology: Android SDK, Java, Javascript, RestAPIs, IBM, Knockout.js, Material Design Principles.
+__________________________________________________________________________________________
+TECHNICAL SKILLS
+
+
+
+Full Stack Development: 
+Programming Languages: Python, Javascript, Typescript, PHP, Java, SQL, HTML, Ruby
+Front-end Frameworks: React.js, Redux, AngularJS, Bootstrap, Material-UI, Ionic, Knockout.js, Laravel Nova
+Back-end Frameworks: Node.js, Express.js, Django, Laravel, Ruby on Rails
+Mobile Native Frameworks: Expo, Android, Cordova, React native, Phone gap, Genymotion 
+Databases: Redis, Memcache, Whoosh, MySQL, MongoDB, PostgreSQL, SQLite, MariaDB, Firebase realtime database, Google Cloud Firestore
+Cloud Services: AWS EC2, RDS, S3, Lambda, Google Cloud Platform, Speech To Text Google AI 
+Testing Frameworks: Postman, Python pytest, code conventions(flake8, isort, black), Jest
+Version Control:  Github, Bitbucket, Gitlab.
+OS: Linux, MacOS, Windows
+DevOps: Docker, CronJobs, Jenkins, LXCs, KVMs, GitLab CI/CD, FTP, Putty, ssh
+
+Blockchain: 
+Blockchains: Ethereum, ERC20, ERC721, Solana, BSV Blockchain, Hyperledger Fabric, EOS blockchain, TRON
+Programming Languages: Solidity, Golang, Rust, Scrypt(BSV)
+DEFI: Orca SDK, Meteora API, Raydium API
+Use Cases: Arbitrage, NFT minting, Open Sea, Smart Contract Auditing, Token Creation and Deployment
+Frameworks: Alchemy SDK, Metamask, Solflare, Web3.js, Ethers.js, IPFS, Chakra-UI, Gitcoin
+Testing Frameworks: Truffle, Hardhat, Ganache, Sepolia, Ropstein, Etherscan, Infura, ABI interfaces, OpenZeppelin
+
+Design Tools: Wix, Weebly, Wordpress
+IDEs: Visual Code, Pycharm, Java Rational Application Developer(IBM), Android Studio, Intellij IDEA
+Third Party Frameworks:Stripe API, Timekit API, Beeswax API, Nubill API, Coingecko, Fireblocks, Aquanow
+Agile Methodologies: SCRUM, Kanban, JIRA, Confluence, Trello
+Soft Skills: Problem-solving and analytical skills, Time management skills, Collaboration.
+Languages: Advanced English, Native Spanish, Middle French. 
